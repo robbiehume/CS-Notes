@@ -27,7 +27,7 @@ nnoremap ww :w<CR>
 nnoremap wwq :wq<CR>
 
 try
-        set undodir=~/tempRobbie/.undodir
+        set undodir=~/.undodir
         set undofile
 catch
 endtry
