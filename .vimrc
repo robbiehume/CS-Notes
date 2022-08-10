@@ -22,8 +22,8 @@ vnoremap kj <ESC>
 cnoremap kj <C-C>
 cnoremap jk <C-C>
 
-nnoremap qqq :q!<CR>
-
+nnoremap qq :q!<CR>
+nnoremap ww :w<CR>
 
 try
         set undodir=~/tempRobbie/.undodir
