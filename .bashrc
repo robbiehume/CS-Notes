@@ -11,7 +11,7 @@ fi
 # User specific aliases and functions
 #alias ll='ls'
 alias lsd='ls --group-directories-first'
-alias lst='ls -ltr'
+alias lst='ls -ltrh'
 alias cdback='cd -'
 
 # Variables
@@ -20,17 +20,17 @@ alias cdback='cd -'
 lstt (){
 	if [ $# -eq 2 ]
 	then
-			ls -ltr $1 | tail -$2
+			ls -ltrh $1 | tail -$2
 	elif [ $# -eq 1 ]
 	then
 			if [ -d $1 ]
 			then
-					ls -ltr $1 | tail
+					ls -ltrh $1 | tail
 			else
-					ls -ltr | tail -$1
+					ls -ltrh | tail -$1
 			fi
 	else
-			ls -ltr | tail
+			ls -ltrh | tail
 	fi
 }
 
