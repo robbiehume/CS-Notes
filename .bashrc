@@ -9,10 +9,16 @@ fi
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-#alias ll='ls'
+alias ll='ls'
 alias lsd='ls --group-directories-first'
 alias lst='ls -ltrh'
+alias lsa='ls -al'
+alias lsta='ls -altrh'
+alias lsat='ls -altrh'
 alias cdback='cd -'
+alias cdb='cd -'
+alias docs='cd ~/Documents'
+alias downs='cd ~/Downloads'
 
 # Variables
 
@@ -45,4 +51,18 @@ cdlst (){
 
 lsgrep (){
     ls -ltr | grep -i $1
+}
+
+
+# Git
+alias gits='git status'
+
+gitd () {
+    git diff $1
+}  
+
+gita () {
+    git add .
+    git commit -m "$1"
+    git push
 }
