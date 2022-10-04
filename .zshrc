@@ -111,7 +111,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias zeus="ssh zeus"
-#alias zeus="printf '1\nrhume\nGMUfall2020\ny' | /opt/cisco/anyconnect/bin/vpn -s connect vpn.gmu.edu >> /dev/null 2>&1; ssh zeus; /opt/cisco/anyconnect/bin/vpn -s disconnect >> /dev/null 2>&1"
 alias pi="ssh pi"
 alias docs="cd /Users/robbiehume/Documents"
 alias downs="cd /Users/robbiehume/Downloads"
