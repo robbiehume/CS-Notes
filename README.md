@@ -3,7 +3,7 @@
 
 ## GitHub Wiki tips
 * Search for wiki containing a specific word: `repo:robbiehume/CS-Notes <word>`; then click on the **Wikis** tab
-* Crop an image: 
+* Crop an image: `<img src="image_link" width="400">`
 
 * Side by side code table template:
     * <table><tr>
