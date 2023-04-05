@@ -13,6 +13,9 @@ set tabstop=4
 nnoremap sp :set paste<CR>
 nnoremap snp :set nopaste<CR>
 
+nnoremap nu :set number<CR>
+nnoremap nnu :set nonumber<CR>
+
 inoremap jk <ESC>
 inoremap kj <ESC>
 
