@@ -2,6 +2,10 @@
 
 
 ## GitHub Wiki tips
+* HTML tab space: 
+    * Regular space: &nbsp;
+    * Two spaces gap: &ensp;
+    * Four spaces gap: &emsp;
 * Search for wiki containing a specific word: `repo:robbiehume/CS-Notes <word>`; then click on the **Wikis** tab
 * Crop an image: `<img src="image_link" width="400">`
 
