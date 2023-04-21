@@ -27,3 +27,8 @@
 
 * Collapsable div: [link](https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab)
   * Example used in [AWS Notes](https://github.com/robbiehume/CS-Notes/wiki/AWS) at top of page
+  
+  
+## Misc. tips
+* To look through a wiki contents inside collapsable sections, search through the edit page
+* Could create markdown pages in the repo and link to them from the wiki pages 
