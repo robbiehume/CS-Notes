@@ -61,6 +61,10 @@ gitd () {
     git diff $1
 }  
 
+gitb () {
+    git branch $1
+}
+
 gita () {
     git add .
     git commit -m "$1"
