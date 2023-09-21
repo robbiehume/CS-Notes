@@ -77,6 +77,8 @@ gita () {
     git push
 }
 
-svim () {
+svim () {    
     sudo -e $1
+    # EDITOR environment variable must be set to vim 
+    # once inside vim do :set ft=type, where type is the file type. Ex: :set ft=nginx
 }
