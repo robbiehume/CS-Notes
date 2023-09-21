@@ -8,6 +8,12 @@ fi
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
+# Misc.
+complete -C '/usr/local/bin/aws_completer' aws
+source /usr/share/bash-completion/completions/git
+export EDITOR=vim
+
+
 # User specific aliases and functions
 alias ll='ls'
 alias lsd='ls --group-directories-first'
@@ -69,4 +75,8 @@ gita () {
     git add .
     git commit -m "$1"
     git push
+}
+
+svim () {
+    sudo -e $1
 }
