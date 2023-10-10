@@ -9,6 +9,8 @@ fi
 # export SYSTEMD_PAGER=
 
 # Misc.
+HISTSIZE=2000
+HISTFILESIZE=2000
 complete -C '/usr/local/bin/aws_completer' aws
 source /usr/share/bash-completion/completions/git
 export EDITOR=vim
