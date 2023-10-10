@@ -80,7 +80,11 @@ gita () {
 }
 
 svim () {    
-    sudo -e $1
-    # EDITOR environment variable must be set to vim 
-    # once inside vim do :set ft=type, where type is the file type. Ex: :set ft=nginx
+    # sudo -e $1
+        # EDITOR environment variable must be set to vim 
+        # once inside vim do :set ft=type, where type is the file type. Ex: :set ft=nginx
+    # OR: sudo -Nu /home/robbie/.vimrc $1
+    sudo vim $1
+        # Once in file, need to do :source /home/robbie/.vimrc
+        # Can add nnoremap rvi :source /home/robbie/.vimrc<CR> in the /root/.vimrc
 }
