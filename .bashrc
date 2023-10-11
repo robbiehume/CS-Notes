@@ -88,3 +88,11 @@ svim () {
         # Once in file, need to do :source /home/robbie/.vimrc
         # Can add nnoremap rvi :source /home/robbie/.vimrc<CR> in the /root/.vimrc
 }
+
+vimd () {
+    vimdiff $1 $2
+}
+
+vdiff () {
+    vimdiff $1 $2
+}
