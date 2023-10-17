@@ -17,9 +17,10 @@ export EDITOR=vim
 
 
 # User specific aliases and functions
-alias ll='ls'
+alias ll='ls -l --color=auto'
 alias lsd='ls --group-directories-first'
 alias lst='ls -ltrh'
+alias llt='ls -ltrh'
 alias lsa='ls -al'
 alias lsta='ls -altrh'
 alias lsat='ls -altrh'
