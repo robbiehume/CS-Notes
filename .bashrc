@@ -2,6 +2,7 @@
 
 ## Best .bashrc's
 # https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c
+# https://www.reddit.com/r/commandline/comments/9md3pp/a_very_useful_bashrc_file/
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -32,8 +33,19 @@ export HISTFILE=~/.bash_eternal_history
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
+# Allow ctrl-S for history navigation (with ctrl-R)
+stty -ixon
 
-# User specific aliases and functions
+
+#######################################################
+# GENERAL ALIASES
+#######################################################
+
+# Aliases to list directory files
+alias sl='ls'
+#alias l='ls'
+#alias s='ls'
+#alias lo='ls -o'
 alias ll='ls -lh --color=auto'
 alias lsd='ls --group-directories-first'
 alias lst='ls -ltrh'
@@ -41,10 +53,52 @@ alias llt='ls -ltrh'
 alias lsa='ls -Alh'
 alias lsta='ls -Altrh'
 alias lsat='ls -Altrh'
-alias cdback='cd -'
+alias lsg='ls -ltrh | grep -i '
+alias lsgrep='ls -ltrh | grep -i '
+
+# Aliases to change directory
 alias cdb='cd -'
+alias cdh='cd ~'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+# Move 'up' so many directories instead of using several cd ../../, etc.
+up() { cd $(eval printf '../'%.0s {1..$1}) && pwd; }
 alias docs='cd ~/Documents'
 alias downs='cd ~/Downloads'
+
+# Aliases to modified commands
+alias cp='cp -i' # -v?
+alias mv='mv -i' # -v?
+alias mkdir='mkdir -p'
+alias cls='clear'
+alias rmd='rm -rfv'
+alias svim='sudo vim '
+alias his='history'
+
+# Edit .bashrc / .vimrc
+alias vbrc='vim ~/.bahrc'
+alias sbrc='. ~/.bashrc'
+alias vrc='vim ~/.vimrc'
+
+# Search files in the current folder
+alias findg='find . | grep '
+
+# Search command line history
+#alias hg='history | grep '
+
+# Search running processes
+alias psg='ps aux | grep '
+alias psa='ps aux'
+
+# Git aliases
+alias gits='git status' # or gs
+alias gitb='git branch' # or gb
+alias gitd='git diff' # or gd
+gita () {
+    git add .
+    git commit -m "$1"
+    git push
+}
 
 # Variables
 
@@ -66,7 +120,6 @@ lstt (){
 	fi
 }
 
-
 cdls (){
 	cd $1; ls
 }
@@ -75,20 +128,16 @@ cdlst (){
     cd $1; lst
 }
 
-lsgrep (){
-    ls -ltrh | grep -i $1
-}
 
-
-svim () {    
+#svim () {    
     # sudo -e $1
         # EDITOR environment variable must be set to vim 
         # once inside vim do :set ft=type, where type is the file type. Ex: :set ft=nginx
     # OR: sudo -Nu /home/robbie/.vimrc $1
-    sudo vim $1
+#    sudo vim $1
         # Once in file, need to do :source /home/robbie/.vimrc
         # Can add nnoremap rvi :source /home/robbie/.vimrc<CR> in the /root/.vimrc
-}
+#}
 
 vimd () {
     vimdiff $1 $2
@@ -99,19 +148,3 @@ vdiff () {
 }
 
 
-# Git
-alias gits='git status'
-
-gitd () {
-    git diff $1
-}  
-
-gitb () {
-    git branch $1
-}
-
-gita () {
-    git add .
-    git commit -m "$1"
-    git push
-}
