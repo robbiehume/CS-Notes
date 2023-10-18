@@ -25,7 +25,7 @@ export EDITOR=vim
 HISTSIZE= #5000
 HISTFILESIZE= #5000
 HISTTIMEFORMAT="[%F %T]:  "
-HISTIGNORE='ll':'lsa':'lst'
+HISTIGNORE='ll':'lsa':'lst':'ls':'cdb':'cdh'
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
 export HISTFILE=~/.bash_eternal_history
@@ -100,9 +100,13 @@ gita () {
     git push
 }
 
+
 # Variables
 
-# Functions
+
+#######################################################
+# SPECIAL FUNCTIONS
+#######################################################
 lstt (){
 	if [ $# -eq 2 ]
 	then
