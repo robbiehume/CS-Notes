@@ -16,6 +16,22 @@ source /usr/share/bash-completion/completions/git
 export EDITOR=vim
 
 
+# Eternal bash history.
+# ---------------------
+# Undocumented feature which sets the size to "unlimited".
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+HISTSIZE= #5000
+HISTFILESIZE= #5000
+HISTTIMEFORMAT="[%F %T]:  "
+HISTIGNORE='ll':'lsa':'lst'
+# Change the file location because certain bash sessions truncate .bash_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.bash_eternal_history
+# Force prompt to write history after every command (useful for when you have multiple ssh sessions open)
+# http://superuser.com/questions/20900/bash-history-loss
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+
 # User specific aliases and functions
 alias ll='ls -lh --color=auto'
 alias lsd='ls --group-directories-first'
