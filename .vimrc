@@ -32,6 +32,16 @@ nnoremap qq :q!<CR>
 nnoremap ww :w<CR>
 nnoremap wwq :wq<CR>
 
+" Comment out multiple lines
+"     Must select the beginning of each line you want to comment by doing Ctrl-V
+vmap cc <S-I>#<ESC>
+
+" Change current word
+"     It will delete the word the current cursor is on, then type what you want to replace
+"     Then go to Normal mode and press `.` to replace the next occurrence
+"     Can press `n` to go to the next highlighted occurrence and skip the current one without replacing it
+nnoremap <silent> ff :let @/=expand('<cword>')<cr>*``cgn
+
 " Ctrl-Enter to new line
 imap <C-Enter> <Esc>o
 
