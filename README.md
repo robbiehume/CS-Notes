@@ -6,6 +6,7 @@
     * Regular space: `&nbsp;`
     * Two spaces gap: `&ensp;`
     * Four spaces gap: `&emsp;`
+* Add line: `<br/>` 
 * Search for wiki containing a specific word: `repo:robbiehume/CS-Notes <word>`; then click on the **Wikis** tab
 * Crop an image: `<img src="image_link" width="400">`
 
