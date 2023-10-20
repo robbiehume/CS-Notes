@@ -133,6 +133,9 @@ cdlst (){
     cd $1; lst
 }
 
+cdl (){
+    cd $1; ll
+}
 
 #svim () {    
     # sudo -e $1
