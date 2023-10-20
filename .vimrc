@@ -43,7 +43,7 @@ vmap cc <S-I>#<ESC>
 nnoremap <silent> ff :let @/=expand('<cword>')<cr>*``cgn
 
 " Ctrl-Enter to new line
-imap <C-Enter> <Esc>o
+imap <C-@> <Esc>o
 
 try
         set undodir=~/.undodir
