@@ -32,6 +32,7 @@ export HISTFILE=~/.bash_eternal_history
 # Force prompt to write history after every command (useful for when you have multiple ssh sessions open)
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+# If wanting to refresh history, do bash -l to get history of other open sessions
 
 # Allow ctrl-S for history navigation (with ctrl-R)
 stty -ixon
