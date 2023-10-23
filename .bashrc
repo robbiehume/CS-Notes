@@ -155,4 +155,7 @@ vdiff () {
     vimdiff $1 $2
 }
 
+restarts (){
+    sudo service $1 restart; sudo service $1 status
+}
 
