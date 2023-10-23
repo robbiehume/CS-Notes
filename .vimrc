@@ -42,7 +42,7 @@ vmap cc <S-I>#<ESC>
 "     Can press `n` to go to the next highlighted occurrence and skip the current one without replacing it
 nnoremap <silent> ff :let @/=expand('<cword>')<cr>*``cgn
 
-" Ctrl-Enter to new line
+" Ctrl-Space to new line
 imap <C-@> <Esc>o
 
 try
