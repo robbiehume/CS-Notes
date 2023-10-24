@@ -32,6 +32,7 @@ cnoremap jk <C-C>
 nnoremap qq :q!<CR>
 nnoremap ww :w<CR>
 nnoremap wwq :wq<CR>
+nnoremap www :w !
 
 " Comment out multiple lines
 "     Must select the beginning of each line you want to comment by doing Ctrl-V
