@@ -73,7 +73,7 @@ alias mv='mv -i' # -v?
 alias mkdir='mkdir -p'
 alias cls='clear'
 alias rmd='rm -rfv'
-alias svim='sudo vim '
+alias svim='sudo vim -c "source /home/robbie/.vimrc"'
 alias his='history'
 
 # Edit .bashrc / .vimrc
@@ -159,3 +159,14 @@ restarts (){
     sudo service $1 restart; sudo service $1 status
 }
 
+statuss (){
+    sudo service $1 status
+}
+
+stops (){
+    sudo service $1 stop; sudo service $1 status
+}
+
+starts (){
+    sudo service $1 start; sudo service $1 status
+}
