@@ -49,6 +49,7 @@ function color_my_prompt {
 
 # configure PROMPT_COMMAND which is executed each time before PS1
 export PROMPT_COMMAND=color_my_prompt
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # if .git-prompt.sh exists, set options and execute it
 if [ -f ~/.git-prompt.sh ]; then
