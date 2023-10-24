@@ -155,6 +155,10 @@ vdiff () {
     vimdiff $1 $2
 }
 
+svd () {
+    sudo vimdiff -c "source /home/robbie/.vimrc" $1 $2
+}
+
 restarts (){
     sudo service $1 restart; sudo service $1 status
 }
