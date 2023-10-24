@@ -5,6 +5,7 @@ set incsearch
 set hlsearch
 set laststatus=2
 set autoindent
+set history=500
 
 set tabstop=4
 
