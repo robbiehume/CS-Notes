@@ -95,6 +95,7 @@ alias psa='ps aux'
 alias gits='git status' # or gs
 alias gitb='git branch' # or gb
 alias gitd='git diff' # or gd
+alias gcm='git checkout main'
 gita () {
     git add .
     git commit -m "$1"
