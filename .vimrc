@@ -8,6 +8,7 @@ set incsearch
 set hlsearch
 set laststatus=2
 set autoindent
+set smartindent
 set history=500
 
 set tabstop=4
@@ -25,6 +26,7 @@ nnoremap ; :
 " Allows for scroll and cursor click
 "    With this set, need to use Shift or Shift-Alt to copy highlighted text with cursor
 "    In order to paste, need to enter insert mode and do Shift-Insert or Shift-Left_Click (or wheel click?)
+"    https://unix.stackexchange.com/questions/139578/copy-paste-for-vim-is-not-working-when-mouse-set-mouse-a-is-on
 set mouse=a
 
 "nnoremap sp :set paste<CR>
@@ -32,6 +34,13 @@ set mouse=a
 
 nnoremap nu :set number<CR>
 nnoremap nnu :set nonumber<CR>
+
+" Move to beginning / end of line
+nnoremap fj 0
+nnoremap fk $
+
+" Redo last undo
+nnoremap rr <c-r>
 
 " Can do ',dd' to cut line(s) to different paste registry
 "   Do ',pp' to paste
