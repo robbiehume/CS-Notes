@@ -96,6 +96,7 @@ alias gits='git status' # or gs
 alias gitb='git branch' # or gb
 alias gitd='git diff' # or gd
 alias gcm='git checkout main'
+alias gmm='git merge main'
 gita () {
     git add .
     git commit -m "$1"
