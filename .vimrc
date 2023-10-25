@@ -1,3 +1,6 @@
+" Mapping explanation
+"    https://dev.to/iggredible/basic-vim-mapping-5ahj
+
 set number
 set ignorecase
 set smartcase
