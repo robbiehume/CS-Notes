@@ -71,6 +71,7 @@ alias downs='cd ~/Downloads'
 alias cp='cp -i' # -v?
 alias mv='mv -i' # -v?
 alias mkdir='mkdir -p'
+alias diff='diff --color'
 alias cls='clear'
 alias rmd='rm -rfv'
 alias svim='sudo vim -c "source /home/robbie/.vimrc"'
