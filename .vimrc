@@ -69,6 +69,9 @@ nnoremap www :w !
 "     Must select the beginning of each line you want to comment by doing Ctrl-V
 vmap cc <S-I>#<ESC>
 
+" Shift-Backspace to delete forwards
+imap ^H ^[[3~
+
 " Change current word
 "     It will delete the word the current cursor is on, then type what you want to replace
 "     Then go to Normal mode and press `.` to replace the next occurrence
