@@ -12,9 +12,13 @@ fi
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
-# Misc.
+# Auto completions
+#    bash_completion may need to be installed
 complete -C '/usr/local/bin/aws_completer' aws
 source /usr/share/bash-completion/completions/git
+complete -W 'httpd apache nginx' starts stops restarts statuss
+
+# Misc.
 export EDITOR=vim
 
 
