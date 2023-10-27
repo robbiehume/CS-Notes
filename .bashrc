@@ -66,6 +66,8 @@ alias lsgrep='ls -ltrh | grep -i '
 # Aliases to change directory
 alias cdb='cd -'
 alias cdh='cd ~'
+alias cd..='cd ..'
+alias cd...='cd ../..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 # Move 'up' so many directories instead of using several cd ../../, etc.
@@ -154,6 +156,10 @@ cdl (){
     cd $1; ll
 }
 
+mkcd (){
+    mkdir -p $1; cd $1; pwd
+}
+
 #svim () {    
     # sudo -e $1
         # EDITOR environment variable must be set to vim 
@@ -163,6 +169,12 @@ cdl (){
         # Once in file, need to do :source /home/robbie/.vimrc
         # Can add nnoremap rvi :source /home/robbie/.vimrc<CR> in the /root/.vimrc
 #}
+
+getvar (){ # output the value of a variable
+    local first=${!1:-"$1"}
+    shift
+    command echo "$first" "$@"
+}
 
 vimd () {
     vimdiff $1 $2
