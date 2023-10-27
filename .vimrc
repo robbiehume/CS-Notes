@@ -50,6 +50,7 @@ xnoremap <leader>d "_d
 nnoremap <leader>p "_dp
 xnoremap <leader>p "_dp
 
+" Enter normal mode if 'jk' or 'kj' is typed in any other mode 
 inoremap jk <ESC>
 inoremap kj <ESC>
 inoremap jj <ESC>
@@ -78,10 +79,15 @@ imap ^H ^[[3~
 "     Can press `n` to go to the next highlighted occurrence and skip the current one without replacing it
 nnoremap <silent> ff :let @/=expand('<cword>')<cr>*``cgn
 
-" Ctrl-Space or ,+Enter to new line
+" Ctrl-Space or ,+Enter to add new line from insert mode
 imap <leader><cr> <Esc>o
 imap <C-@> <Esc>o
 
+" Ctrl-H to search / highlight current word under cursor 
+nnoremap <C-H> *N
+
+" Keeps past edits so you can undo to past changes from previous vim sessions
+"    Must create ~/.undodir first 
 try
         set undodir=~/.undodir
         set undofile
