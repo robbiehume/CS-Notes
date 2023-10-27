@@ -92,6 +92,7 @@ alias hg='history | grep '
 #        Ex: 'pp v' will run last command that starts with v
 #    If nothing is provided, it will run the last command
 alias pp='fc -s'
+alias ppp='fc -s -2'    # run 2nd to last command
 
 # Edit .bashrc / .vimrc
 alias vbrc='vim ~/.bahrc'
