@@ -1,3 +1,5 @@
+import pytest
+
 def func(val):
   if val == "test":
     return True
