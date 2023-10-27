@@ -1,6 +1,9 @@
 " Mapping explanation
 "    https://dev.to/iggredible/basic-vim-mapping-5ahj
 
+" Tab insert spaces?
+"    (https://stackoverflow.com/questions/234564/tab-key-4-spaces-and-auto-indent-after-curly-braces-in-vim)
+
 syntax on
 set number
 set ignorecase
