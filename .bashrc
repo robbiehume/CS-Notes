@@ -82,6 +82,14 @@ alias cls='clear'
 alias rmd='rm -rfv'
 alias svim='sudo vim -c "source /home/robbie/.vimrc"'
 alias his='history'
+alias hist='history | tail'
+alias hg='history | grep '
+
+# Run last command (Similar to !!)
+#    Can pass a parameter to run the first command that matches it
+#        Ex: 'pp v' will run last command that starts with v
+#    If nothing is provided, it will run the last command
+alias pp='fc -s'
 
 # Edit .bashrc / .vimrc
 alias vbrc='vim ~/.bahrc'
@@ -166,6 +174,10 @@ vdiff () {
 
 svd () {
     sudo vimdiff -c "source /home/robbie/.vimrc" $1 $2
+}
+
+rmt (){
+    mv $1 ~/trash_bin
 }
 
 restarts (){
