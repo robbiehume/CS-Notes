@@ -64,8 +64,8 @@ alias lsg='ls -ltrh | grep -i '
 alias lsgrep='ls -ltrh | grep -i '
 
 # Aliases to change directory
-alias cdb='cd -'
-alias cdh='cd ~'
+alias cdb='cd -; ll'
+alias cdh='cd ~; ll'
 alias cd..='cd ..'
 alias cd...='cd ../..'
 alias ...='cd ../..'
