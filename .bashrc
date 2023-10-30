@@ -80,12 +80,14 @@ alias cp='cp -i' # -v?
 alias mv='mv -i' # -v?
 alias mkdir='mkdir -p'
 alias diff='diff --color'
+alias sdiff='sudo diff --color'
 alias cls='clear'
 alias rmd='rm -rfv'
 alias svim='sudo vim -c "source /home/robbie/.vimrc"'
 alias his='history'
 alias hist='history | tail'
 alias hg='history | grep '
+alias gh='history | grep '
 
 # Run last command (Similar to !!)
 #    Can pass a parameter to run the first command that matches it
@@ -113,6 +115,7 @@ alias psa='ps aux'
 alias gits='git status' # or gs
 alias gitb='git branch' # or gb
 alias gitd='git diff' # or gd
+alias gitdc='git diff --cached'
 alias gcm='git checkout main'
 alias gmm='git merge main'
 gita () {
@@ -154,6 +157,10 @@ cdlst (){
 }
 
 cdl (){
+    cd $1; ll
+}
+
+cl (){
     cd $1; ll
 }
 
