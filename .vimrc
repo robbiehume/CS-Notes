@@ -40,8 +40,8 @@ nnoremap nu :set number<CR>
 nnoremap nnu :set nonumber<CR>
 
 " Move to beginning / end of line
-nnoremap fj 0
-nnoremap fk $
+nnoremap fh 0
+nnoremap fl $
 
 " Redo last undo
 nnoremap rr <c-r>
@@ -52,6 +52,11 @@ nnoremap <leader>d "_d
 xnoremap <leader>d "_d
 nnoremap <leader>p "_dp
 xnoremap <leader>p "_dp
+
+" Alt-p to paste from copy register (helpful if you delete something after copying)
+"     Alt-P for paste before cursor
+nnoremap ^[p "0p
+nnoremap ^[P "0P
 
 " Enter normal mode if 'jk' or 'kj' is typed in any other mode 
 inoremap jk <ESC>
