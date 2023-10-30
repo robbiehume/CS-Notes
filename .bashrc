@@ -132,6 +132,14 @@ gcmm () {
     git checkout main
     git merge icrhume1
 }
+add () {
+    if [ $# -eq 0 ]
+    then
+        git add .
+    else
+        git add $@
+    fi
+}
 
 
 # Variables
