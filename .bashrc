@@ -112,16 +112,25 @@ alias psg='ps aux | grep '
 alias psa='ps aux'
 
 # Git aliases
-alias gits='git status' # or gs
+alias cdg='cd `git rev-parse --show-toplevel`' # cd to git project top-level directory
+alias gits='git status'
+alias gs='git status'
+alias gita='git add'
 alias gitb='git branch' # or gb
 alias gitd='git diff' # or gd
 alias gitdc='git diff --cached'
 alias gcm='git checkout main'
 alias gmm='git merge main'
-gita () {
+# cd to top level directory, checkout main, and pull
+alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'
+gacp () {
     git add .
     git commit -m "$1"
     git push
+}
+gcmm () {
+    git checkout main
+    git merge icrhume1
 }
 
 
