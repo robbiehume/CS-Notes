@@ -21,7 +21,7 @@ complete -W 'httpd apache nginx' starts stops restarts statuss
 # Misc.
 export EDITOR=vim
 # shopt commands
-shopt -s cdspell dirspell direxpand #extdebug
+shopt -s cdspell dirspell #direxpand #extdebug
 
 
 # Eternal bash history.
