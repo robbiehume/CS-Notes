@@ -58,6 +58,9 @@ xnoremap <leader>p "_dp
 nnoremap ^[p "0p
 nnoremap ^[P "0P
 
+" Alt-p to paste from register while in insert mode (it pastes before the cursor)
+imap ^[p ^R0
+
 " Enter normal mode if 'jk' or 'kj' is typed in any other mode 
 inoremap jk <ESC>
 inoremap kj <ESC>
