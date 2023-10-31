@@ -41,8 +41,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # If wanting to refresh history, do bash -l to get history of other open sessions
 
 # Allow ctrl-S for history navigation (with ctrl-R)
-stty -ixon
-
+[[ $- == *i* ]] && stty -ixon
 
 #######################################################
 # GENERAL ALIASES
