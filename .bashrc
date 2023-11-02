@@ -75,6 +75,7 @@ alias docs='cd ~/Documents'
 alias downs='cd ~/Downloads'
 
 # Aliases to modified commands
+alias sudo='sudo '   # allows for sudo to run aliases
 alias cp='cp -i' # -v?
 alias mv='mv -i' # -v?
 alias mkdir='mkdir -p'
