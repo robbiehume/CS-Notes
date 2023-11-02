@@ -76,6 +76,7 @@ alias downs='cd ~/Downloads'
 
 # Aliases to modified commands
 alias sudo='sudo '   # allows for sudo to run aliases
+alias suroot='sudo bash --init-file /home/robbie/.bashrc'    # allows for root shell with user .bashrc
 alias cp='cp -i' # -v?
 alias mv='mv -i' # -v?
 alias mkdir='mkdir -p'
