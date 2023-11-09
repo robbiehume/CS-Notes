@@ -97,6 +97,9 @@ imap <C-@> <Esc>o
 " Ctrl-H to search / highlight current word under cursor 
 nnoremap <C-H> *N
 
+" Set filetype syntax based on file extension
+au BufRead,BufNewFile *.service setfiletype systemd
+
 " Keeps past edits so you can undo to past changes from previous vim sessions
 "    Must create ~/.undodir first 
 try
