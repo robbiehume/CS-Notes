@@ -55,8 +55,7 @@ alias sl='ls'
 #alias lo='ls -o'
 alias ll='ls -lh --color=auto'
 alias lsd='ls --group-directories-first'
-alias lst='ls -ltrh'
-alias llt='ls -ltrh'
+alias {lst,llt}='ls -ltrh'
 alias lsa='ls -Alh'
 alias lsta='ls -Altrh'
 alias lsat='ls -Altrh'
@@ -111,8 +110,7 @@ alias findg='find . | grep '
 # See bash command line history
 alias his='history'
 alias hist='history | tail'
-alias hg='history | grep '
-alias gh='history | grep '
+alias {hg,gh}='history | grep '
 alias vhis='vim ~/.bash_eternal_history'
 
 # Search running processes
@@ -121,21 +119,25 @@ alias psa='ps aux'
 
 # Git aliases / functions
 alias cdg='cd `git rev-parse --show-toplevel`' # cd to git project top-level directory
-alias gits='git status'
-alias gs='git status'
-alias gita='git add'
+alias {gits,gs}='git status'
+alias gita='add'
 alias gitb='git branch' # or gb
-alias gitd='git diff' # or gd
-alias gd='git diff'
-alias gitdc='git diff --cached'
+alias {gitd,gd}='git diff'
+alias {gitdc,gdc}='git diff --cached'
 alias gdc='git diff --cached'
 alias gcm='git checkout main'
 alias gmm='git merge main'
-# cd to top level directory, checkout main, and pull
-alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'
-gacp () {
+alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull' # cd to top level directory, checkout main, and pull
+alias pushmain='git push; git checkout dev_branch'
+com () {
+    git commit -m "$1"
+}
+gac () {
     git add .
     git commit -m "$1"
+}
+gacp () {
+    gac $1
     git push
 }
 gcmm () {
