@@ -20,7 +20,8 @@ complete -W 'httpd apache nginx' starts stops restarts statuss
 
 # Misc.
 export EDITOR=vim
-# shopt commands
+export H=~
+    # shopt commands
 shopt -s cdspell dirspell #direxpand extdebug
 
 
@@ -31,7 +32,7 @@ shopt -s cdspell dirspell #direxpand extdebug
 HISTSIZE= #5000
 HISTFILESIZE= #5000
 HISTTIMEFORMAT="[%F %T]:  "
-HISTIGNORE='ll':'lsa':'lst':'ls':'cdb':'cdh'
+#HISTIGNORE='ll':'lsa':'lst':'ls':'cdb':'cdh':'vbrc':'sbrc':'vrc'
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
 export HISTFILE=~/.bash_eternal_history
@@ -65,8 +66,8 @@ alias lsgrep='ls -ltrh | grep -i '
 # Aliases to change directory
 alias cdb='cd -; ll'
 alias cdh='cd ~; ll'
-alias cd..='cd ..'
-alias cd...='cd ../..'
+alias cd..='cd ..; ll'
+alias cd...='cd ../..; ll'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 # Move 'up' so many directories instead of using several cd ../../, etc.
@@ -112,6 +113,7 @@ alias his='history'
 alias hist='history | tail'
 alias hg='history | grep '
 alias gh='history | grep '
+alias vhis='vim ~/.bash_eternal_history'
 
 # Search running processes
 alias psg='ps aux | grep '
@@ -222,7 +224,7 @@ svd () {
 }
 
 rmt (){
-    mv $1 ~/trash_bin
+    mv -v $1 ~/trash_bin
 }
 
 restarts (){
