@@ -21,7 +21,7 @@ complete -W 'httpd apache nginx' starts stops restarts statuss
 # Misc.
 export EDITOR=vim
 # shopt commands
-shopt -s cdspell dirspell direxpand #extdebug
+shopt -s cdspell dirspell #direxpand extdebug
 
 
 # Eternal bash history.
@@ -82,15 +82,12 @@ alias mv='mv -i' # -v?
 alias mkdir='mkdir -p'
 alias diff='diff --color'
 alias sdiff='sudo diff --color'
+alias svdiff='sudo vimdiff -c "source /home/dev_icrhume1/.vimrc"'
 alias cls='clear'
 alias rmd='rm -rfv'
 alias svim='sudo vim -c "source /home/robbie/.vimrc"'
-alias sll='sudo ls -l --color'
+alias sll='sudo ls -lh --color'
 alias slt='sudo ls -ltrh --color'
-alias his='history'
-alias hist='history | tail'
-alias hg='history | grep '
-alias gh='history | grep '
 
 # Run last command (Similar to !!)
 #    Can pass a parameter to run the first command that matches it
@@ -104,24 +101,32 @@ alias vbrc='vim ~/.bahrc'
 alias sbrc='. ~/.bashrc'
 alias vrc='vim ~/.vimrc'
 
+# See currently used ports
+alias ports='sudo netstat -tulpn | grep LISTEN'
+
 # Search files in the current folder
 alias findg='find . | grep '
 
-# Search command line history
-#alias hg='history | grep '
+# See bash command line history
+alias his='history'
+alias hist='history | tail'
+alias hg='history | grep '
+alias gh='history | grep '
 
 # Search running processes
 alias psg='ps aux | grep '
 alias psa='ps aux'
 
-# Git aliases
+# Git aliases / functions
 alias cdg='cd `git rev-parse --show-toplevel`' # cd to git project top-level directory
 alias gits='git status'
 alias gs='git status'
 alias gita='git add'
 alias gitb='git branch' # or gb
 alias gitd='git diff' # or gd
+alias gd='git diff'
 alias gitdc='git diff --cached'
+alias gdc='git diff --cached'
 alias gcm='git checkout main'
 alias gmm='git merge main'
 # cd to top level directory, checkout main, and pull
@@ -221,17 +226,17 @@ rmt (){
 }
 
 restarts (){
-    sudo service $1 restart; sudo service $1 status
+    sudo systemctl restart $1; sudo systemctl status $1
 }
 
 statuss (){
-    sudo service $1 status
+    sudo systemctl status $1
 }
 
 stops (){
-    sudo service $1 stop; sudo service $1 status
+    sudo systemctl stop $1; sudo systemctl status $1
 }
 
 starts (){
-    sudo service $1 start; sudo service $1 status
+    sudo systemctl start $1; sudo systemctl status $1
 }
