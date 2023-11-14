@@ -123,8 +123,9 @@ alias {gits,gs}='git status'
 alias gita='add'
 alias gitb='git branch' # or gb
 alias {gitd,gd}='git diff'
+alias gdm='git diff --diff-filter=M'
 alias {gitdc,gdc}='git diff --cached'
-alias gdc='git diff --cached'
+alias gdcm='git diff --cached --diff-filter=M'
 alias gcm='git checkout main'
 alias gmm='git merge main'
 alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull' # cd to top level directory, checkout main, and pull
