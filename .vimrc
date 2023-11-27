@@ -97,6 +97,9 @@ imap <C-@> <Esc>o
 " Ctrl-H to search / highlight current word under cursor 
 nnoremap <C-H> *N
 
+" Alt-E to reload file
+nnoremap ^[e :e!<CR>
+
 " Set filetype syntax based on file extension
 au BufRead,BufNewFile *.service setfiletype systemd
 
