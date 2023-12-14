@@ -77,6 +77,9 @@ nnoremap ww :w<CR>
 nnoremap wwq :wq<CR>
 nnoremap www :w !
 
+" Alt-F to W (move forward one word)
+nnoremap ^[f W
+
 " Comment out multiple lines
 "     Must select the beginning of each line you want to comment by doing Ctrl-V
 vmap cc <S-I>#<ESC>
