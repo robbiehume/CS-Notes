@@ -18,10 +18,16 @@ complete -C '/usr/local/bin/aws_completer' aws
 source /usr/share/bash-completion/completions/git
 complete -W 'httpd apache nginx' starts stops restarts statuss
 
+
+# VARIABLES
+#export PYTHONUSERBASE=/home/dev_icrhume1/working/bin/
+
+
 # Misc.
 export EDITOR=vim
 export H=~
-    # shopt commands
+
+# shopt commands
 shopt -s cdspell dirspell #direxpand extdebug
 
 
@@ -32,12 +38,14 @@ shopt -s cdspell dirspell #direxpand extdebug
 HISTSIZE= #5000
 HISTFILESIZE= #5000
 HISTTIMEFORMAT="[%F %T]:  "
+HISTCONTROL=ignoredups
 #HISTIGNORE='ll':'lsa':'lst':'ls':'cdb':'cdh':'vbrc':'sbrc':'vrc'
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
 export HISTFILE=~/.bash_eternal_history
 # Force prompt to write history after every command (useful for when you have multiple ssh sessions open)
 # http://superuser.com/questions/20900/bash-history-loss
+#shopt -s histappend
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # If wanting to refresh history, do bash -l to get history of other open sessions
 
@@ -49,6 +57,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 #######################################################
 
 # Aliases to list directory files
+alias ll='ls -lh'
 alias sl='ls'
 #alias l='ls'
 #alias s='ls'
@@ -118,27 +127,34 @@ alias psg='ps aux | grep '
 alias psa='ps aux'
 
 # Git aliases / functions
+#export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o 'IdentitiesOnly yes'" # Make git use ssh key instead of cert
 alias cdg='cd `git rev-parse --show-toplevel`' # cd to git project top-level directory
 alias {gits,gs}='git status'
-alias gita='add'
+alias gita='git add'
 alias gitb='git branch' # or gb
-alias {gitd,gd}='git diff'
+alias {gitd,gd}='git fetch'
+alias {gitd,gd}='git diff --no-index'
+alias gdi='git diff'
 alias gdm='git diff --diff-filter=M'
 alias {gitdc,gdc}='git diff --cached'
 alias gdcm='git diff --cached --diff-filter=M'
+alias {gcr,gci}='git checkout dev_branch'
 alias gcm='git checkout main'
 alias gmm='git merge main'
-alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull' # cd to top level directory, checkout main, and pull
+alias {gmr,gmi}='git merge dev_branch'
+alias glh='git log | head'
+# cd to top level directory, checkout main, and pull
+alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'
 alias pushmain='git push; git checkout dev_branch'
 com () {
-    git commit -m "$1"
+    git commit -m "$@"
 }
 gac () {
     git add .
-    git commit -m "$1"
+    git commit -m "$@"
 }
 gacp () {
-    gac $1
+    gac $@
     git push
 }
 gcmm () {
@@ -153,9 +169,6 @@ add () {
         git add $@
     fi
 }
-
-
-# Variables
 
 
 #######################################################
