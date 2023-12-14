@@ -45,6 +45,9 @@ nnoremap ftn :set ft=nginx<CR>
 nmap ^S :syntax on<CR>
 nmap ^S^F :syntax off<CR>
 
+" json formatting on
+nmap ^[j :%!jq .<CR>G
+
 " Redo last undo
 nnoremap rr <c-r>
 
@@ -100,10 +103,11 @@ imap ^H ^[[3~
 nnoremap <silent> ff :let @/=expand('<cword>')<cr>*``cgn
 
 " Ctrl-Space or ,+Enter to add new line from insert mode
+"    Can also do Alt-o / O
 imap <leader><cr> <Esc>o
 imap <C-@> <Esc>o
 
-" Ctrl-H to search / highlight current word under cursor 
+" Ctrl-H to search / highlight current word under cursor
 nnoremap <C-H> *N
 
 " Alt-E to reload file
@@ -111,6 +115,7 @@ nnoremap ^[e :e!<CR>
 
 " Set filetype syntax based on file extension
 au BufRead,BufNewFile *.service setfiletype systemd
+au BufRead,BufNewFile *log_format.conf setfiletype nginx
 
 " Keeps past edits so you can undo to past changes from previous vim sessions
 "    Must create ~/.undodir first 
