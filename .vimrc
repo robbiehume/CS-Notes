@@ -103,7 +103,7 @@ imap ^H ^[[3~
 nnoremap <silent> ff :let @/=expand('<cword>')<cr>*``cgn
 
 " Ctrl-Space or ,+Enter to add new line from insert mode
-"    Can also do Alt-o / O
+"     Can also do Alt-o / O
 imap <leader><cr> <Esc>o
 imap <C-@> <Esc>o
 
