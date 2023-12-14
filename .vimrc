@@ -39,12 +39,18 @@ set mouse=a
 nnoremap nu :set number<CR>
 nnoremap nnu :set nonumber<CR>
 
-" Move to beginning / end of line
-nnoremap fh 0
-nnoremap fl $
+nnoremap ftn :set ft=nginx<CR>
+
+" Turn syntax highlighting on / off
+nmap ^S :syntax on<CR>
+nmap ^S^F :syntax off<CR>
 
 " Redo last undo
 nnoremap rr <c-r>
+
+" Move to beginning / end of line
+nnoremap fh 0
+nnoremap fl $
 
 " Can do ',dd' to cut line(s) to different paste registry
 "   Do ',pp' to paste
