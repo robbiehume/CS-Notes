@@ -36,8 +36,8 @@ set mouse=a
 "nnoremap sp :set paste<CR>
 "nnoremap snp :set nopaste<CR>
 
-nnoremap nu :set number<CR>
-nnoremap nnu :set nonumber<CR>
+"nnoremap nu :set number<CR>
+"nnoremap nnu :set nonumber<CR>
 
 nnoremap ftn :set ft=nginx<CR>
 
