@@ -45,8 +45,8 @@ nnoremap ftn :set ft=nginx<CR>
 nmap ^S :syntax on<CR>
 nmap ^S^F :syntax off<CR>
 
-" json formatting on
-nmap ^[j :%!jq .<CR>G
+" Ctrl-J to turn json formatting on
+nmap <C-J> :%!jq .<CR>G
 
 " Redo last undo
 nnoremap rr <c-r>
