@@ -93,6 +93,13 @@ nnoremap ^[f W
 "     Must select the beginning of each line you want to comment by doing Ctrl-V
 vmap cc <S-I>#<ESC>
 
+" Comment / uncomment out current line
+nnoremap cc <S-I>#<ESC>
+nnoremap cd ^s<ESC>
+
+" Cut line and enter insert mode
+nnoremap di cc
+
 " Shift-Backspace to delete forwards
 imap ^H ^[[3~
 
