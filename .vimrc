@@ -52,8 +52,8 @@ nmap ^[j :%!jq .<CR>G
 nnoremap rr <c-r>
 
 " Move to beginning / end of line
-nnoremap fh 0
-nnoremap fl $
+nnoremap fh ^
+nnoremap fl g_
 
 " Can do ',dd' to cut line(s) to different paste registry
 "   Do ',pp' to paste
@@ -74,6 +74,7 @@ imap ^[p ^R0
 inoremap jk <ESC>
 inoremap kj <ESC>
 inoremap jj <ESC>
+inoremap kk <ESC>
 
 vnoremap jk <ESC>
 vnoremap kj <ESC>
