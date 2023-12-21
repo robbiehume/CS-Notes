@@ -125,6 +125,7 @@ alias vhis='vim ~/.bash_eternal_history'
 # Search running processes
 alias psg='ps aux | grep '
 alias psa='ps aux'
+alias js='jobs'
 
 # Git aliases / functions
 #export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o 'IdentitiesOnly yes'" # Make git use ssh key instead of cert
@@ -143,8 +144,8 @@ alias gcm='git checkout main'
 alias gmm='git merge main'
 alias {gmr,gmi}='git merge dev_branch'
 alias glh='git log | head'
-# cd to top level directory, checkout main, and pull
-alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'
+alias {gpush,gitp}='git push'
+alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'  # cd to top level directory, checkout main, and pull
 alias pushmain='git push; git checkout dev_branch'
 com () {
     git commit -m "$@"
