@@ -94,6 +94,7 @@ alias sdiff='sudo diff --color'
 alias svdiff='sudo vimdiff -c "source /home/dev_icrhume1/.vimrc"'
 alias cls='clear'
 alias rmd='rm -rfv'
+alias cim='vim'
 alias svim='sudo vim -c "source /home/robbie/.vimrc"'
 alias sll='sudo ls -lh --color'
 alias slt='sudo ls -ltrh --color'
@@ -143,10 +144,17 @@ alias {gcr,gci}='git checkout dev_branch'
 alias gcm='git checkout main'
 alias gmm='git merge main'
 alias {gmr,gmi}='git merge dev_branch'
-alias glh='git log | head'
 alias {gpush,gitp}='git push'
 alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'  # cd to top level directory, checkout main, and pull
 alias pushmain='git push; git checkout dev_branch'
+glh () {
+    if [[ $# -eq 0 ]]
+    then
+        git log | head -n 10
+    else
+        git log | head -n $1
+    fi
+}
 com () {
     git commit -m "$@"
 }
@@ -171,6 +179,9 @@ add () {
     fi
 }
 
+
+##### Misc. aliases
+alias {nt,ngt}='sudo nginx -t'
 
 #######################################################
 # SPECIAL FUNCTIONS
