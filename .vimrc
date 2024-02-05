@@ -15,11 +15,15 @@ set smartcase
 set incsearch       " incremental search
 set hlsearch        " highlight search
 set laststatus=2
-set autoindent
-set smartindent
+"set autoindent
+"set smartindent
+"set cursorline
 set history=500
 
 set tabstop=4
+set shiftwidth=4
+filetype plugin indent on
+set expandtab
 
 "set cursorline
 
@@ -83,8 +87,9 @@ inoremap kj <ESC>
 inoremap jj <ESC>
 inoremap kk <ESC>
 
-vnoremap jk <ESC>
+"vnoremap jk <ESC>
 vnoremap kj <ESC>
+vnoremap kk <ESC>
 
 cnoremap kj <C-C>
 cnoremap jk <C-C>
@@ -128,6 +133,9 @@ nnoremap <C-H> *N
 " Alt-E to reload file
 nnoremap ^[e :e!<CR>
 
+" Press i while text is highlighted in visusal mode to delete it and enter insert mode
+vnoremap i di
+
 " Set filetype syntax based on file extension
 au BufRead,BufNewFile *.service setfiletype systemd
 au BufRead,BufNewFile *log_format.conf setfiletype nginx
@@ -140,3 +148,11 @@ try
 catch
 endtry
 
+
+"""""""""""""""""""""
+"" NOTES
+"""""""""""""""""""""
+
+" to 'unset' an option, just do :set <option>!
+" Replace all tabs with spaces: :%retab
+    " must have: set expandtab ts=4 sw=4 ai
