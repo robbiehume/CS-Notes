@@ -9,10 +9,11 @@
 
 syntax on
 set number
+set showmatch       " show matching beginning bracket / parantheses when you input a closing one
 set ignorecase
 set smartcase
-set incsearch
-set hlsearch
+set incsearch       " incremental search
+set hlsearch        " highlight search
 set laststatus=2
 set autoindent
 set smartindent
