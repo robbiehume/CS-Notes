@@ -16,7 +16,7 @@ fi
 #    bash_completion may need to be installed
 complete -C '/usr/local/bin/aws_completer' aws
 source /usr/share/bash-completion/completions/git
-complete -W 'httpd apache nginx' starts stops restarts statuss
+complete -W 'httpd apache nginx' starts stops restarts statuss isactive
 
 
 # VARIABLES
@@ -92,9 +92,11 @@ alias mkdir='mkdir -p'
 alias diff='diff --color'
 alias sdiff='sudo diff --color'
 alias svdiff='sudo vimdiff -c "source /home/dev_icrhume1/.vimrc"'
+alias srm='sudo rm'
 alias cls='clear'
 alias rmd='rm -rfv'
 alias cim='vim'
+alias vi='vim'
 alias svim='sudo vim -c "source /home/robbie/.vimrc"'
 alias sll='sudo ls -lh --color'
 alias slt='sudo ls -ltrh --color'
@@ -103,7 +105,7 @@ alias slt='sudo ls -ltrh --color'
 #    Can pass a parameter to run the first command that matches it
 #        Ex: 'pp v' will run last command that starts with v
 #    If nothing is provided, it will run the last command
-alias pf='fc -s'
+alias {pf,rr}='fc -s'  # or just r?
 alias pp='fc -s -2'    # run 2nd to last command
 
 # Edit .bashrc / .vimrc
@@ -143,6 +145,8 @@ alias gdcm='git diff --cached --diff-filter=M'
 alias {gcr,gci}='git checkout dev_branch'
 alias gcm='git checkout main'
 alias gmm='git merge main'
+alias gcmm='git checkout main; git merge icrhume1'
+alias {gpcm,gpm}='git push; gcmm'
 alias {gmr,gmi}='git merge dev_branch'
 alias {gpush,gitp}='git push'
 alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'  # cd to top level directory, checkout main, and pull
@@ -165,10 +169,6 @@ gac () {
 gacp () {
     gac $@
     git push
-}
-gcmm () {
-    git checkout main
-    git merge icrhume1
 }
 add () {
     if [ $# -eq 0 ]
@@ -256,17 +256,28 @@ rmt (){
 }
 
 restarts (){
-    sudo systemctl restart $1; sudo systemctl status $1
+    sudo systemctl restart $1; isactive $1 #sudo systemctl status $1
 }
 
 statuss (){
     sudo systemctl status $1
 }
 
+isactive (){
+    stat=$(sudo systemctl status $1)
+    if [[ $stat == *"inactive"* ]]; then
+        echo "$stat" | grep -E --color "\b(inactive|dead)\b|$"
+    else
+        export GREP_COLORS='ms=01;32'
+        echo "$stat" | grep -E --color "\b(active|running)\b|$"
+    fi
+    export GREP_COLORS=''
+}
+
 stops (){
-    sudo systemctl stop $1; sudo systemctl status $1
+    sudo systemctl stop $1; isactive $1
 }
 
 starts (){
-    sudo systemctl start $1; sudo systemctl status $1
+    sudo systemctl start $1; isactive $1
 }
