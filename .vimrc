@@ -88,8 +88,8 @@ inoremap jj <ESC>
 inoremap kk <ESC>
 
 "vnoremap jk <ESC>
-vnoremap kj <ESC>
 vnoremap kk <ESC>
+vnoremap kj <ESC>
 
 cnoremap kj <C-C>
 cnoremap jk <C-C>
