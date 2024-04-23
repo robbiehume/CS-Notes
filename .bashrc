@@ -57,19 +57,18 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 #######################################################
 
 # Aliases to list directory files
-alias ll='ls -lh'
-alias sl='ls'
+alias ll='sudo ls -lh --color'
+alias ls='sudo ls --color'
+alias slt='sudo ls -ltrh --color'
+alias sl='sudo ls --color'
 #alias l='ls'
 #alias s='ls'
 #alias lo='ls -o'
-alias ll='ls -lh --color=auto'
-alias lsd='ls --group-directories-first'
-alias {lst,llt}='ls -ltrh'
-alias lsa='ls -Alh'
-alias lsta='ls -Altrh'
-alias lsat='ls -Altrh'
-alias lsg='ls -ltrh | grep -i '
-alias lsgrep='ls -ltrh | grep -i '
+alias {lst,llt}='sudo ls -ltrh --color'
+alias lsa='sudo ls -Alh --color'
+alias lsta='sudo ls -Altrh --color'
+alias lsg='lst| grep -i '
+alias lsgrep='lst | grep -i '
 
 # Aliases to change directory
 alias cdb='cd -; ll'
@@ -84,29 +83,63 @@ alias docs='cd ~/Documents'
 alias downs='cd ~/Downloads'
 
 # Aliases to modified commands
-alias sudo='sudo '   # allows for sudo to run aliases
-alias suroot='sudo bash --init-file /home/robbie/.bashrc'    # allows for root shell with user .bashrc
+alias suroot='sudo bash --init-file /home/robbie/.bashrc' # allows for root shell with user .bashrc
 alias cp='cp -i' # -v?
+alias cpp='/usr/bin/cp'
 alias mv='mv -i' # -v?
+alias mvv='/usr/bin/mv'
 alias mkdir='mkdir -p'
 alias diff='diff --color'
 alias sdiff='sudo diff --color'
-alias svdiff='sudo vimdiff -c "source /home/dev_icrhume1/.vimrc"'
-alias srm='sudo rm'
+alias svdiff='sudo vimdiff -c "source /home/robbie/.vimrc"'
 alias cls='clear'
 alias rmd='rm -rfv'
 alias cim='vim'
 alias vi='vim'
-alias svim='sudo vim -c "source /home/robbie/.vimrc"'
-alias sll='sudo ls -lh --color'
-alias slt='sudo ls -ltrh --color'
+alias tail='sudo tail'
+alias tailf='sudo tail -F'
+
+# sudo aliases
+alias sudo='sudo '   # allows for sudo to run aliases
+alias svim='sudo vim -c "source /home/robbie/.vimrc" '
+alias srm='sudo rm'
+alias smv='sudo mv'
+alias sln='sudo ln'
+alias sdr='sudo systemctl daemon-reload'
+
+# tail functions
+tailj () {
+    if [[ $# -eq 1 ]]
+    then
+        sudo tail $1 | grep -o '{[^}]*}' | jq
+    elif [[ $# -eq 2 ]]
+    then
+        sudo tail -F $2 | jq
+    fi
+}
 
 # Run last command (Similar to !!)
 #    Can pass a parameter to run the first command that matches it
 #        Ex: 'pp v' will run last command that starts with v
 #    If nothing is provided, it will run the last command
-alias {pf,rr}='fc -s'  # or just r?
+alias {rr}='fc -s'  # or just r?
 alias pp='fc -s -2'    # run 2nd to last command
+alias ppp='fc -s -3'    # run 2nd to last command
+
+pf () {
+    #cat ~/.bash_eternal_history | grep $1 | tail -1
+    re='^[0-9]+$'
+    if [[ $# -eq 0 ]]
+    then
+        fc -s
+    #elif ! [[ $1 =~ $re ]]
+    #then
+    #    echo "elif"
+    #    #fc -s -$1
+    else
+        eval "$(cat ~/.bash_eternal_history | grep $1 | tail -1)"
+    fi
+}
 
 # Edit .bashrc / .vimrc
 alias vbrc='vim ~/.bahrc'
@@ -114,7 +147,7 @@ alias sbrc='. ~/.bashrc'
 alias vrc='vim ~/.vimrc'
 
 # See currently used ports
-alias ports='sudo netstat -tulpn | grep LISTEN'
+alias ports='sudo netstat -tulpn | grep LISTEN | grep ":[0-9]*"'
 
 # Search files in the current folder
 alias findg='find . | grep '
@@ -129,6 +162,7 @@ alias vhis='vim ~/.bash_eternal_history'
 alias psg='ps aux | grep '
 alias psa='ps aux'
 alias js='jobs'
+alias fgg='fg ~'
 
 # Git aliases / functions
 #export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o 'IdentitiesOnly yes'" # Make git use ssh key instead of cert
