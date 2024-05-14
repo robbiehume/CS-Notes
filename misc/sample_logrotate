@@ -1,4 +1,4 @@
-# This file goes in /etc/logrotate.d
+# This file goes in /etc/logrotate.d and set permissions to 644
 
 /path/to/logfile {
     daily
