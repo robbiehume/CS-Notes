@@ -1,3 +1,5 @@
+# This file goes in /etc/logrotate.d
+
 /path/to/logfile {
     daily
     copytruncate
