@@ -1,0 +1,9 @@
+/path/to/logfile {
+    daily
+    copytruncate
+    compress
+    rotate 10
+    notifempty
+    dateext
+    dateyesterday
+}
