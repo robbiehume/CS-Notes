@@ -6,6 +6,7 @@ After=network.target
 Type=simple
 User=robbie
 WorkingDirectory=/home/robbie/tmp
+Environment="example_env_variable=example_value"
 ExecStart=python3.9 script.py
 Restart=always
 StandardOutput=append:/home/robbie/tmp/output.log
