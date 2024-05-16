@@ -1,0 +1,15 @@
+[Unit]
+Description=Sample python script
+After=network.target
+
+[Service]
+Type=simple
+User=robbie
+WorkingDirectory=/home/robbie/tmp
+ExecStart=python3.9 script.py
+Restart=always
+StandardOutput=append:/home/robbie/tmp/output.log
+StandardError=append:/home/robbie/tmp/error.log
+
+[Install]
+WantedBy=multi-user.target
