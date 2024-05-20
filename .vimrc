@@ -6,6 +6,7 @@
 
 " Resources
 "    Useful vimrc: (https://github.com/amix/vimrc)
+"    https://github.com/DJMcMayhem/dotFiles/blob/2f91270f2e88ddd9a916c8d81702dcb2e043f5c7/.vimrc#L283
 
 if !has('nvim')
     set ttymouse=xterm2
