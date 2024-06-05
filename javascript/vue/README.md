@@ -2,8 +2,8 @@
 
 
 ### Emit up to parent
-* create a searchBox component and then add that component to each of your views.  The component with “emit” an event to signal that a search needs to be performed and the parent will listen for the event and then actually perform the search
-*In the searchBox component you would have something like:
+* Create a searchBox component and then add that component to each of your views.  The component with “emit” an event to signal that a search needs to be performed and the parent will listen for the event and then actually perform the search
+* In the searchBox component you would have something like:
 
   ```Vue
   <template>
@@ -38,3 +38,21 @@
       }
   </script>
   ```
+
+### Preventing form submission
+* If you are using a `<form…>` element but are submitting the content via JavaScript and want to keep the page from automatically reload/changing the URL when you hit enter or click submit, then you need to do the following:
+* Add  onsubmit="event.preventDefault();" to your <form…> tag and return false; from your JavaScript method; i.e.:
+```Vue
+<form id="myForm" onsubmit="event.preventDefault();">
+…. your input fields here …
+              <button type="submit" onclick="mySubmitFunction()">Submit</button>
+</form>
+
+<script>
+              function mySubmitFunction() {
+                             …ajax / axios submission of data…
+
+                             return false;
+              }
+</script>
+```
