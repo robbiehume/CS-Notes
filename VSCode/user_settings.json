@@ -1,0 +1,40 @@
+{
+    "sftp.downloadWhenOpenInRemoteExplorer": true,
+    "[java]": {
+        "editor.suggest.snippetsPreventQuickSuggestions": false
+    },
+    "maven.terminal.useJavaHome": false,
+    "maven.terminal.customEnv": [
+        {
+            "environmentVariable": "JAVA_HOME",                // variable name
+            "value": "C:\\Program Files\\Java\\openjdk-1.8.0.342"      // value
+        }
+    ],
+    "java.inlayHints.parameterNames.enabled": "all",
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "terminal.integrated.commandsToSkipShell": [
+        "-workbench.action.quickOpen"
+    ],
+    "workbench.editor.titleScrollbarSizing": "large",
+    "explorer.confirmDelete": false,
+    "git.confirmSync": false,
+    "vim.vimrc.path": "$HOME/.vimrc",
+    "vscode-neovim.neovimExecutablePaths.win32": "C:\\Users\\dev_icrhume1\\nvim-win64\\nvim-win64\\bin\\nvim.exe",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f",
+        "statusBar.foreground": "#ffffff",
+        "statusBar.debuggingForeground": "#ffffff"
+    },
+    "vim.vimrc.enable": true,
+    "vim.handleKeys": {
+        "<C-p>": false, 
+    },
+    "html.autoClosingTags": false,
+    "vim.showcmd": false
+}
