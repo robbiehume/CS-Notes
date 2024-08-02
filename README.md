@@ -28,6 +28,7 @@
 
 * Collapsable div: [link](https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab)
   * Example used in [AWS Notes](https://github.com/robbiehume/CS-Notes/wiki/AWS) at top of page, and [Java Notes](https://github.com/robbiehume/CS-Notes/wiki/Java#-strings-)
+  * To start with it opened, do <details open="">
   
   
 ## Misc. tips
