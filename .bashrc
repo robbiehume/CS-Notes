@@ -21,14 +21,14 @@ complete -W 'httpd apache nginx' starts stops restarts statuss isactive
 
 # VARIABLES
 #export PYTHONUSERBASE=/home/dev_icrhume1/working/bin/
-
+export {sysd,system}=/etc/systemd/system
 
 # Misc.
 export EDITOR=vim
 export H=~
 
 # shopt commands
-shopt -s cdspell dirspell #direxpand extdebug
+shopt -s cdspell dirspell direxpand extdebug
 
 
 # Eternal bash history.
@@ -57,16 +57,15 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 #######################################################
 
 # Aliases to list directory files
+alias {l,ll,sll}='sudo ls -lh --color'
 alias ll='sudo ls -lh --color'
-alias ls='sudo ls --color'
+alias {ls,sl}='sudo ls --color'
 alias slt='sudo ls -ltrh --color'
-alias sl='sudo ls --color'
-#alias l='ls'
 #alias s='ls'
 #alias lo='ls -o'
 alias {lst,llt}='sudo ls -ltrh --color'
 alias lsa='sudo ls -Alh --color'
-alias lsta='sudo ls -Altrh --color'
+alias {lsta,lsat}='sudo ls -Altrh --color'
 alias lsg='lst| grep -i '
 alias lsgrep='lst | grep -i '
 
@@ -98,11 +97,28 @@ alias cim='vim'
 alias vi='vim'
 alias tail='sudo tail'
 alias tailf='sudo tail -F'
+alias sscp='scpp'
+function scpp () {
+    user=$(whoami)
+    sudo cp -a $@
+    sudo chown $user.$user -R ${@: -1}
+}
+#function cp () {
+#    if [[ $1 == "-f" || $2 == "-f" ]]
+#    then
+#       echo "/usr/bin/cp $@"
+#       #/usr/bin/cp -v $@
+#    else
+#       echo "/usr/bin/cp -i $@"
+#       #/usr/bin/cp -i $@
+#    fi
+#}
 
 # sudo aliases
 alias sudo='sudo '   # allows for sudo to run aliases
 alias svim='sudo vim -c "source /home/robbie/.vimrc" '
 alias srm='sudo rm'
+alias {srmd,srmf}='sudo rm -rfv'
 alias smv='sudo mv'
 alias sln='sudo ln'
 alias sdr='sudo systemctl daemon-reload'
@@ -142,12 +158,16 @@ pf () {
 }
 
 # Edit .bashrc / .vimrc
-alias vbrc='vim ~/.bahrc'
+alias {vbrc,cbrc}='vim ~/.bahrc'
 alias sbrc='. ~/.bashrc'
 alias vrc='vim ~/.vimrc'
+alias vbp='vim ~/.bash_profile'
+alias sbp='. ~/.bash_profile'
+alias cbrc='vbrc'
+
 
 # See currently used ports
-alias ports='sudo netstat -tulpn | grep LISTEN | grep ":[0-9]*"'
+alias ports='sudo netstat -anp | grep LISTEN | grep -P ":\K[0-9]{1,5}"'
 
 # Search files in the current folder
 alias findg='find . | grep '
@@ -159,21 +179,30 @@ alias {hg,gh}='history | grep '
 alias vhis='vim ~/.bash_eternal_history'
 
 # Search running processes
-alias psg='ps aux | grep '
+alias {psg,psgrep}='ps aux | grep '
+alias {pg,pgrep}='pgrep -a -u robbie_user'
 alias psa='ps aux'
-alias js='jobs'
+alias psu='ps -u'
+alias js='jobs -l'
+alias {kkj,kkjs,kjobs,killjobs,killj,killjs}='kill -9 $(jobs -p)'
+alias kill='kill -9'
+alias pkill='pkill'
 alias fgg='fg ~'
 
 # Git aliases / functions
 #export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o 'IdentitiesOnly yes'" # Make git use ssh key instead of cert
-alias cdg='cd `git rev-parse --show-toplevel`' # cd to git project top-level directory
+alias {cdg,cdtop,gtop}='cd `git rev-parse --show-toplevel`' # cd to git project top-level directory
 alias {gits,gs}='git status'
-alias gita='git add' # or ga
+alias {gita,ga}='git add'
+alias {addt,gat}='git add `git rev-parse --show-toplevel`/'
+alias {gitc,gc}='git commit -m'
 alias gitb='git branch' # or gb
 alias {gitd,gd}='git fetch'
 alias {gitd,gd}='git diff --no-index'
 alias gdi='git diff'
 alias gdm='git diff --diff-filter=M'
+alias {gitl,gl}='git log -5 --graph --name-status --pretty=format:"%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+alias {gitll,gll}='git log --graph --name-status --pretty=format:"%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias {gitdc,gdc}='git diff --cached'
 alias gdcm='git diff --cached --diff-filter=M'
 alias {gcr,gci}='git checkout dev_branch'
@@ -185,6 +214,7 @@ alias {gmr,gmi}='git merge dev_branch'
 alias {gpush,gitp}='git push'
 alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'  # cd to top level directory, checkout main, and pull
 alias pushmain='git push; git checkout dev_branch'
+alias checkout='git checkout'
 glh () {
     if [[ $# -eq 0 ]]
     then
@@ -213,9 +243,25 @@ add () {
     fi
 }
 
+##### Ngninx related
+alias {nt,ngt}='sudo nginx -t'
+alias lnl='sudo ls -lh --color /var/log/nginx; echo "/var/log/nginx/"'
+alias lnlt='sudo ls -ltrh --color /var/log/nginx; echo "/var/log/nginx/"'
+alias lns='sudo ls -lh --color /etc/nginx/sites-available; echo "/etc/nginx/sites-available/"'
+rn (){     ## restart nginx if no errors
+    nginx_test=$(grep successful <(sudo nginx -t 2>&1))
+    . ~/.bashrc
+    if [ -n "$nginx_test" ];then
+        restarts nginx
+    else
+        sudo nginx -t
+    fi
+}
 
 ##### Misc. aliases
-alias {nt,ngt}='sudo nginx -t'
+alias {bl,bashl}='bash -l'
+alias ifc='ifconfig
+alias dv='deactivate'
 
 #######################################################
 # SPECIAL FUNCTIONS
@@ -256,6 +302,8 @@ cl (){
 mkcd (){
     mkdir -p $1; cd $1; pwd
 }
+mkdircd(){ mkcd "$@"; }
+cdmk(){ mkcd "$@"; }
 
 #svim () {    
     # sudo -e $1
@@ -294,7 +342,8 @@ restarts (){
 }
 
 statuss (){
-    sudo systemctl status $1
+    #sudo systemctl status $1
+    isactive $1
 }
 
 isactive (){
