@@ -12,6 +12,8 @@
 "" Commands that need to be edited with ctrl, alt, etc. depending on system:
 " alt-j / ctrl-j
 " alt-p
+" alt-f
+" alt-e
 
 
 if !has('nvim')
@@ -87,12 +89,13 @@ xnoremap <leader>p "_dp
 
 " Alt-p to paste from copy register (helpful if you delete something after copying)
 "     Alt-P for paste before cursor
+" Or Ctrl-p instead?
 "nnoremap  "0p
 "nnoremap  "0P
 nnoremap <C-p> "0p
 
 " Alt-p to paste from register while in insert mode (it pastes before the cursor)
-imap  0
+imap ^[p ^R0
 
 " Swap current line with line below / above it
 nnoremap ml ddp
@@ -136,7 +139,13 @@ cnoremap wz<CR> w!<CR> <C-Z>
 nnoremap zz <C-Z>
 
 " Alt-F to W (move forward one word)
-nnoremap  W
+nnoremap ^[f W
+
+" Go to matching bracket / parentheses
+nnoremap mb %
+
+" Move to middle of the file
+nnoremap gm 50%
 
 " Comment out multiple lines
 "     Must select the beginning of each line you want to comment by doing Ctrl-V
@@ -152,42 +161,97 @@ nnoremap cj <S-I>//<ESC>
 " Comment / uncomment html (<!-- ... -->)
 nnoremap ch <S-I><!-- <ESC><S-A> --><ESC>
 nnoremap chh <S-I><!-- <ESC><S-A> --><ESC>
-nnoremap chd ^dw<ESC>g_dw
+nnoremap chd ^dw<ESC>g_dw<BS>
 
 " Cut line and enter insert mode
 nnoremap di cc
 
-" Delete character under cursor and enter insert mode
-nnoremap s i
+" Keep new cursor position on visual copy
+vnoremap y m`y<C-O>
+
+" Delete character under cursor and enter insert mode (don't copy character)
+nnoremap s "_dli
 
 " Shift-Backspace to delete forwards
-"imap
+"imap ^H ^[[3~
 
 " Change current word
 "     It will delete the word the current cursor is on, then type what you want to replace
 "     Then go to Normal mode and press `.` to replace the next occurrence
 "     Can press `n` to go to the next highlighted occurrence and skip the current one without replacing it
-nnoremap <silent> ff :let @/=expand('<cword>')<cr>*``cgn
+nnoremap <silent> ff :let @/=expand('<cword>')<CR>*``cgn
+nnoremap ffh cgn
+
+" Replace ' with " on current line(s)
+" :s/"/'/g
+
+" Replace all instances of currently highlighted text (https://www.reddit.com/r/vim/comments/19sm9v/replace_all_instances_of_currently_highlighted/)
+nnoremap rh :%s///g<left><left>
 
 "" Delete word and enter insert mode
-nnoremap <silent> dw caw
+nnoremap <silent> dw ciw    " used to be caw
 
 " Ctrl-Space or ,+Enter to add new line from insert mode
 "     Can also do Alt-o / O
-"imap <leader><cr> <Esc>o
+"imap <leader><CR> <Esc>o
 imap <C-@> <Esc>o
 
 " Ctrl-H to search / highlight current word under cursor
 nnoremap <C-H> *N
 
 " Alt-E to reload file
-nnoremap  :e!<CR>G
+nnoremap ^[e :e!<CR>G
 
 " Press i while text is highlighted in visusal mode to delete it and enter insert mode
 vnoremap i di
 
 " Run current file from terminal
 nnoremap <leader>r :w<CR>:!%:p<CR>
+
+" Rerun last command-line change (a command invoked with ':'; ex: :/s/old/new/
+nnoremap r: @:<CR>
+nnoremap <leader>: @:<CR>
+
+" Press ",." to rerun mapping
+"     Can re-run it n amount of times: "n,."
+let @j = "."
+nnoremap <leader>. @j
+
+"Make it easier to indent a visual selection several times.
+xnoremap > >gv
+xnoremap < <gv
+
+"Prevents '.swp' files from being placed in the current directory
+"set backupdir=~/.vim/Backups,.
+"set directory=~/.vim/Backups,.
+
+" Shortcut to open new tab
+nnoremap <leader>t :tabedit<space>
+
+" Move around in insert mode
+inoremap <C-k> <C-o>gk
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-j> <C-o>gj
+
+"(R)eplace all
+nnoremap ^[r yw:%s/\<<C-r>"\>//g<left><left>
+"nnoremap ^[r y:%s/<-r>"/new text/g
+
+"Select entire line (minus EOL) with 'vv', entire file (characterwise) with 'VV'
+xnoremap <expr> V mode() ==# "V" ? "gg0voG$h" : "V"
+xnoremap <expr> v mode() ==# "v" ? "0o$h" : "v"
+
+"Make basic movements work better with wrapped lines
+nnoremap j gj
+nnoremap gj j
+nnoremap k gk
+nnoremap gk k
+
+"Make backspace delete in normal
+nnoremap <BS>    <BS>x
+xnoremap <BS>    x
+inoremap <C-b> <C-o>db
 
 " Set filetype syntax based on file extension
 au BufRead,BufNewFile *.service setfiletype systemd
