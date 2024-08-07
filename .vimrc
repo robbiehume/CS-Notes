@@ -8,6 +8,11 @@
 "    Useful vimrc: (https://github.com/amix/vimrc)
 "    https://github.com/DJMcMayhem/dotFiles/blob/2f91270f2e88ddd9a916c8d81702dcb2e043f5c7/.vimrc#L283
 
+
+"" Commands that need to be edited with ctrl, alt, etc. depending on system:
+" ctrl-j
+
+
 if !has('nvim')
     set ttymouse=xterm2
 endif
@@ -24,7 +29,10 @@ set laststatus=2
 "set autoindent
 "set smartindent
 "set cursorline
-set history=500
+set history=1000
+
+""  Underline instead of highlight search terms
+"hi Search ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline
 
 set tabstop=4
 set shiftwidth=4
@@ -36,7 +44,7 @@ set expandtab
 " Set leader to ',' instead of '\'
 let mapleader = ","
 
-nnoremap <leader><space> :noh<cr>
+nnoremap <leader><space> :noh<CR>
 
 " Map ';' to ':' so you don't have to hit the shift key when running commands
 nnoremap ; :
@@ -55,11 +63,11 @@ set clipboard=unnamed
 
 nnoremap ftn :set ft=nginx<CR>
 
-" Turn syntax highlighting on / off
-nmap  :syntax on<CR>
-nmap  :syntax off<CR>
+" Ctrl-S to turn syntax highlighting on / off
+nmap <C-S> :syntax on<CR>
+nmap <C-S-F> :syntax off<CR>
 
-" Ctrl-J to turn json formatting on
+" Ctrl-J to turn json formatting on; should we do alt-j instead?
 nmap <C-J> :%!jq .<CR>G
 
 " Redo last undo
