@@ -10,7 +10,8 @@
 
 
 "" Commands that need to be edited with ctrl, alt, etc. depending on system:
-" ctrl-j
+" alt-j / ctrl-j
+" alt-p
 
 
 if !has('nvim')
@@ -115,12 +116,24 @@ vnoremap kj <ESC>
 cnoremap kj <C-C>
 cnoremap jk <C-C>
 
+cnoremap w<CR> w!<CR>
+cnoremap wq<CR> wq!<CR>
 nnoremap qq :q!<CR>
-nnoremap ww :w<CR>
-nnoremap wwq :wq<CR>
+nnoremap ww :w!<CR>
+nnoremap wwq :wq!<CR>
 nnoremap www :w !
+nnoremap xx :wq!<CR>
 "nnoremap wrn :w | ! sudo service nginx restart | sudo service nginx status<CR>
 "nnoremap wrs :w ! sudo service server restart; sudo service server status<CR>
+
+" Save and stop current vim process
+nnoremap zw :w!<CR> <C-Z>
+nnoremap wz :w!<CR> <C-Z>
+nnoremap wwz :w!<CR> <C-Z>
+cnoremap wz<CR> w!<CR> <C-Z>
+
+" Stop current vim process
+nnoremap zz <C-Z>
 
 " Alt-F to W (move forward one word)
 nnoremap  W
