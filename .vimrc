@@ -123,8 +123,8 @@ cnoremap w<CR> w!<CR>
 cnoremap wq<CR> wq!<CR>
 nnoremap qq :q!<CR>
 nnoremap ww :w!<CR>
-nnoremap wwq :wq!<CR>
 nnoremap www :w !
+nnoremap wwq :wq!<CR>
 nnoremap xx :wq!<CR>
 "nnoremap wrn :w | ! sudo service nginx restart | sudo service nginx status<CR>
 "nnoremap wrs :w ! sudo service server restart; sudo service server status<CR>
@@ -161,7 +161,7 @@ nnoremap cj <S-I>//<ESC>
 " Comment / uncomment html (<!-- ... -->)
 nnoremap ch <S-I><!-- <ESC><S-A> --><ESC>
 nnoremap chh <S-I><!-- <ESC><S-A> --><ESC>
-nnoremap chd ^dw<ESC>g_dw<BS>
+nnoremap chd ^dw<ESC>g_dws<BS>
 
 " Cut line and enter insert mode
 nnoremap di cc
