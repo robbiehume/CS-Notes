@@ -8,6 +8,9 @@
 "    Useful vimrc: (https://github.com/amix/vimrc)
 "    https://github.com/DJMcMayhem/dotFiles/blob/2f91270f2e88ddd9a916c8d81702dcb2e043f5c7/.vimrc#L283
 
+" Useful commands:
+"  :help key-notation
+
 
 "" Commands that need to be edited with ctrl, alt, etc. depending on system:
 " alt-j / ctrl-j
