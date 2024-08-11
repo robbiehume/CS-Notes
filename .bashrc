@@ -260,7 +260,7 @@ rn (){     ## restart nginx if no errors
 
 ##### Misc. aliases
 alias {bl,bashl}='bash -l'
-alias ifc='ifconfig
+alias ifc='ifconfig'
 alias dv='deactivate'
 
 #######################################################
