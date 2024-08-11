@@ -158,7 +158,7 @@ pf () {
 }
 
 # Edit .bashrc / .vimrc
-alias {vbrc,cbrc}='vim ~/.bahrc'
+alias {vbrc,cbrc}='vim ~/.bashrc'
 alias sbrc='. ~/.bashrc'
 alias vrc='vim ~/.vimrc'
 alias vbp='vim ~/.bash_profile'
