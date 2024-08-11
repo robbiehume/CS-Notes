@@ -192,7 +192,8 @@ nnoremap ffh cgn
 nnoremap rh :%s///g<left><left>
 
 "" Delete word and enter insert mode
-nnoremap <silent> dw ciw    " used to be caw
+"      used to be caw instead of ciw
+nnoremap <silent> dw ciw
 
 " Ctrl-Space or ,+Enter to add new line from insert mode
 "     Can also do Alt-o / O
