@@ -16,7 +16,7 @@ fi
 #    bash_completion may need to be installed
 complete -C '/usr/local/bin/aws_completer' aws
 source /usr/share/bash-completion/completions/git
-complete -W 'httpd apache nginx' starts stops restarts statuss isactive
+complete -W 'httpd apache nginx' starts stops rs restarts statuss isactive
 
 
 # VARIABLES
@@ -335,6 +335,10 @@ svd () {
 
 rmt (){
     mv -v $1 ~/trash_bin
+}
+
+rs () {
+    sudo systemctl restart $1; sleep 2; isactive $1
 }
 
 restarts (){
