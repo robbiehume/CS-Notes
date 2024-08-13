@@ -17,6 +17,7 @@ fi
 complete -C '/usr/local/bin/aws_completer' aws
 source /usr/share/bash-completion/completions/git
 complete -W 'httpd apache nginx' starts stops rs restarts statuss isactive
+complete -W 'user.user' robbie_user.robbie_user' chown
 
 
 # VARIABLES
@@ -82,7 +83,7 @@ alias docs='cd ~/Documents'
 alias downs='cd ~/Downloads'
 
 # Aliases to modified commands
-alias suroot='sudo bash --init-file /home/robbie/.bashrc' # allows for root shell with user .bashrc
+alias suroot='sudo bash --init-file /home/robbie_user/.bashrc' # allows for root shell with user .bashrc
 alias cp='cp -i' # -v?
 alias cpp='/usr/bin/cp'
 alias mv='mv -i' # -v?
@@ -90,7 +91,7 @@ alias mvv='/usr/bin/mv'
 alias mkdir='mkdir -p'
 alias diff='diff --color'
 alias sdiff='sudo diff --color'
-alias svdiff='sudo vimdiff -c "source /home/robbie/.vimrc"'
+alias svdiff='sudo vimdiff -c "source /home/robbie_user/.vimrc"'
 alias cls='clear'
 alias rmd='rm -rfv'
 alias cim='vim'
@@ -116,7 +117,7 @@ function scpp () {
 
 # sudo aliases
 alias sudo='sudo '   # allows for sudo to run aliases
-alias svim='sudo vim -c "source /home/robbie/.vimrc" '
+alias svim='sudo vim -c "source /home/robbie_user/.vimrc" '
 alias srm='sudo rm'
 alias {srmd,srmf}='sudo rm -rfv'
 alias smv='sudo mv'
@@ -309,10 +310,10 @@ cdmk(){ mkcd "$@"; }
     # sudo -e $1
         # EDITOR environment variable must be set to vim 
         # once inside vim do :set ft=type, where type is the file type. Ex: :set ft=nginx
-    # OR: sudo -Nu /home/robbie/.vimrc $1
+    # OR: sudo -Nu /home/robbie_user/.vimrc $1
 #    sudo vim $1
-        # Once in file, need to do :source /home/robbie/.vimrc
-        # Can add nnoremap rvi :source /home/robbie/.vimrc<CR> in the /root/.vimrc
+        # Once in file, need to do :source /home/robbie_user/.vimrc
+        # Can add nnoremap rvi :source /home/robbie_user/.vimrc<CR> in the /root/.vimrc
 #}
 
 getvar (){ # output the value of a variable
@@ -330,7 +331,7 @@ vdiff () {
 }
 
 svd () {
-    sudo vimdiff -c "source /home/robbie/.vimrc" $1 $2
+    sudo vimdiff -c "source /home/robbie_user/.vimrc" $1 $2
 }
 
 rmt (){
