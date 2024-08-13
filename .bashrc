@@ -17,7 +17,7 @@ fi
 complete -C '/usr/local/bin/aws_completer' aws
 source /usr/share/bash-completion/completions/git
 complete -W 'httpd apache nginx' starts stops rs restarts statuss isactive
-complete -W 'user.user' robbie_user.robbie_user' chown
+complete -W 'user.user' 'robbie_user.robbie_user' chown
 
 
 # VARIABLES
