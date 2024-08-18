@@ -19,9 +19,9 @@
 " alt-e
 
 
-if !has('nvim')
-    set ttymouse=xterm2
-endif
+"if !has('nvim')
+"    set ttymouse=xterm2
+"endif
 
 
 syntax on
