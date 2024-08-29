@@ -38,7 +38,7 @@ shopt -s cdspell dirspell direxpand extdebug
 # http://stackoverflow.com/questions/9457233/unlimited-bash-history
 HISTSIZE= #5000
 HISTFILESIZE= #5000
-HISTTIMEFORMAT=HISTTIMEFORMAT='%m/%d/%y %H:%M - '  #"%F %T: "
+HISTTIMEFORMAT='%m/%d/%y %H:%M - '  #"%F %T: "
 HISTCONTROL=ignoredups
 #HISTIGNORE='ll':'lsa':'lst':'ls':'cdb':'cdh':'vbrc':'sbrc':'vrc'
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
@@ -88,6 +88,7 @@ alias downs='cd ~/Downloads'
 alias suroot='sudo bash --init-file /home/robbie_user/.bashrc' # allows for root shell with user .bashrc
 alias cp='cp -i' # -v?
 alias cpp='/usr/bin/cp'
+alias ccp='sudo install -o robbie_user -g robbie_user -T'
 alias mv='mv -i' # -v?
 alias mvv='/usr/bin/mv'
 alias {mkdir,mdkir}='mkdir -p'
@@ -192,7 +193,7 @@ alias js='jobs -l'
 alias {kkj,kkjs,kjobs,killjobs,killj,killjs}='kill -9 $(jobs -p)'
 alias kill='kill -9'
 alias pkill='pkill'
-alias fgg='fg  -'
+alias fgg='fg -'
 
 # Git aliases / functions
 #export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o 'IdentitiesOnly yes'" # Make git use ssh key instead of cert
@@ -219,7 +220,7 @@ alias {gmr,gmi}='git merge dev_branch'
 alias {gpush,gitp}='git push'
 alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'   # cd to top level directory, checkout main, and pull
 alias pushmain='git push; git checkout dev_branch'
-alias pull='git pull
+alias pull='git pull'
 alias checkout='git checkout'
 glh () {
     if [[ $# -eq 0 ]]
