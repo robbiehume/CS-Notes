@@ -21,7 +21,7 @@ complete -W 'user.user' 'robbie_user.robbie_user' chown
 
 
 # VARIABLES
-#export PYTHONUSERBASE=/home/dev_icrhume1/working/bin/
+#export PYTHONUSERBASE=/home/robbie_user/
 export {sysd,system}=/etc/systemd/system
 
 # Misc.
@@ -38,7 +38,7 @@ shopt -s cdspell dirspell direxpand extdebug
 # http://stackoverflow.com/questions/9457233/unlimited-bash-history
 HISTSIZE= #5000
 HISTFILESIZE= #5000
-HISTTIMEFORMAT="[%F %T]:  "
+HISTTIMEFORMAT=HISTTIMEFORMAT='%m/%d/%y %H:%M - '  #"%F %T: "
 HISTCONTROL=ignoredups
 #HISTIGNORE='ll':'lsa':'lst':'ls':'cdb':'cdh':'vbrc':'sbrc':'vrc'
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
@@ -71,7 +71,9 @@ alias lsg='lst| grep -i '
 alias lsgrep='lst | grep -i '
 
 # Aliases to change directory
+alias ccd='cd'
 alias cdb='cd -; ll'
+alias {opwd,pwdo}='echo $OLDPWD'
 alias cdh='cd ~; ll'
 alias cd..='cd ..; ll'
 alias cd...='cd ../..; ll'
@@ -88,7 +90,7 @@ alias cp='cp -i' # -v?
 alias cpp='/usr/bin/cp'
 alias mv='mv -i' # -v?
 alias mvv='/usr/bin/mv'
-alias mkdir='mkdir -p'
+alias {mkdir,mdkir}='mkdir -p'
 alias diff='diff --color'
 alias sdiff='sudo diff --color'
 alias svdiff='sudo vimdiff -c "source /home/robbie_user/.vimrc"'
@@ -115,7 +117,7 @@ function scpp () {
 #    fi
 #}
 
-# sudo aliases
+# sudo aliases 
 alias sudo='sudo '   # allows for sudo to run aliases
 alias svim='sudo vim -c "source /home/robbie_user/.vimrc" '
 alias srm='sudo rm'
@@ -177,7 +179,9 @@ alias findg='find . | grep '
 alias his='history'
 alias hist='history | tail'
 alias {hg,gh}='history | grep '
-alias vhis='vim ~/.bash_eternal_history'
+vhis () {
+       vim <(history | awk '{$1=""}1')
+}
 
 # Search running processes
 alias {psg,psgrep}='ps aux | grep '
@@ -188,7 +192,7 @@ alias js='jobs -l'
 alias {kkj,kkjs,kjobs,killjobs,killj,killjs}='kill -9 $(jobs -p)'
 alias kill='kill -9'
 alias pkill='pkill'
-alias fgg='fg ~'
+alias fgg='fg  -'
 
 # Git aliases / functions
 #export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o 'IdentitiesOnly yes'" # Make git use ssh key instead of cert
@@ -198,7 +202,7 @@ alias {gita,ga}='git add'
 alias {addt,gat}='git add `git rev-parse --show-toplevel`/'
 alias {gitc,gc}='git commit -m'
 alias gitb='git branch' # or gb
-alias {gitd,gd}='git fetch'
+alias {gitf,gf}='git fetch'
 alias {gitd,gd}='git diff --no-index'
 alias gdi='git diff'
 alias gdm='git diff --diff-filter=M'
@@ -213,8 +217,9 @@ alias gcmm='git checkout main; git merge icrhume1'
 alias {gpcm,gpm}='git push; gcmm'
 alias {gmr,gmi}='git merge dev_branch'
 alias {gpush,gitp}='git push'
-alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'  # cd to top level directory, checkout main, and pull
+alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'   # cd to top level directory, checkout main, and pull
 alias pushmain='git push; git checkout dev_branch'
+alias pull='git pull
 alias checkout='git checkout'
 glh () {
     if [[ $# -eq 0 ]]
