@@ -100,7 +100,7 @@ alias diff='diff --color'
 alias sdiff='sudo diff --color'
 alias svdiff='sudo vimdiff -c "source /home/robbie_user/.vimrc"'
 alias cls='clear'
-alias rmd='rm -rfv'
+alias rmd='rm -rv'  # also add -f ?
 alias cim='vim'
 alias vi='vim'
 alias tail='sudo tail'
@@ -133,7 +133,7 @@ function scpp () {  # copy files with sudo and set file owner to current user?
 alias sudo='sudo '   # allows for sudo to run aliases
 alias svim='sudo vim -c "source /home/robbie_user/.vimrc" '
 alias srm='sudo rm'
-alias {srmd,srmf}='sudo rm -rfv'
+alias {srmd,srmf}='sudo rm -rv'  # also add -f ?
 alias smv='sudo mv'
 alias sln='sudo ln'
 alias {sdr,srd}='sudo systemctl daemon-reload'
