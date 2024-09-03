@@ -84,10 +84,11 @@ up() { cd $(eval printf '../'%.0s {1..$1}) && pwd; }
 alias docs='cd ~/Documents'
 alias downs='cd ~/Downloads'
 
-# Aliases to modified commands
+### Aliases to modified commands
 #alias suroot='sudo bash --init-file /home/robbie_user/.bashrc' # allows for root shell with user .bashrc
 #alias cp='cp -i' # -v?
-alias cp='cp -i --preserve=mode,timestamps'
+#alias cp='cp -i --preserve=mode,timestamps'
+alias cp='cp_func'
 alias copy='/usr/bin/cp'
 alias cpp='cp -i -p'
 alias cpr='cp -i -p -r'
@@ -105,6 +106,13 @@ alias vi='vim'
 alias tail='sudo tail'
 alias tailf='sudo tail -F'
 alias sscp='scpp'
+cp_func() {
+  if [ -d "$1" ]; then
+    command cp -i --preserve=mode,timestamps -r "$@"
+  else
+    command cp -i --preserve=mode,timestamps "$@"
+  fi
+}
 function scpp () {  # copy files with sudo and set file owner to current user?
     user=$(whoami)
     sudo cp -a $@
