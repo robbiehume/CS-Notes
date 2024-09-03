@@ -125,7 +125,9 @@ alias srm='sudo rm'
 alias {srmd,srmf}='sudo rm -rfv'
 alias smv='sudo mv'
 alias sln='sudo ln'
-alias sdr='sudo systemctl daemon-reload'
+alias {sdr,srd}='sudo systemctl daemon-reload'
+alias {alls,sall}='sudo systemctl -t service'
+alias {systemctl,sysctl,sctl}='sudo systemctl'
 
 # tail functions
 tailj () {
