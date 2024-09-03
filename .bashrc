@@ -85,10 +85,10 @@ alias docs='cd ~/Documents'
 alias downs='cd ~/Downloads'
 
 # Aliases to modified commands
-alias suroot='sudo bash --init-file /home/robbie_user/.bashrc' # allows for root shell with user .bashrc
+#alias suroot='sudo bash --init-file /home/robbie_user/.bashrc' # allows for root shell with user .bashrc
 alias cp='cp -i' # -v?
 alias cpp='/usr/bin/cp'
-alias ccp='sudo install -o robbie_user -g robbie_user -T'
+#alias ccp='sudo install -o robbie_user -g robbie_user -T'
 alias mv='mv -i' # -v?
 alias mvv='/usr/bin/mv'
 alias {mkdir,mdkir}='mkdir -p'
@@ -102,7 +102,7 @@ alias vi='vim'
 alias tail='sudo tail'
 alias tailf='sudo tail -F'
 alias sscp='scpp'
-function scpp () {
+function scpp () {  # copy files with sudo and set file owner to current user?
     user=$(whoami)
     sudo cp -a $@
     sudo chown $user.$user -R ${@: -1}
