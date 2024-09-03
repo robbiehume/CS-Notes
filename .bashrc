@@ -86,9 +86,11 @@ alias downs='cd ~/Downloads'
 
 # Aliases to modified commands
 #alias suroot='sudo bash --init-file /home/robbie_user/.bashrc' # allows for root shell with user .bashrc
-alias cp='cp -i' # -v?
-alias cpp='/usr/bin/cp'
-#alias ccp='sudo install -o robbie_user -g robbie_user -T'
+#alias cp='cp -i' # -v?
+alias cp='cp -i --preserve=mode,timestamps'
+alias copy='/usr/bin/cp'
+alias cpp='cp -i -p'
+alias ccp='sudo install -o robbie_user -g robbie_user -T'
 alias mv='mv -i' # -v?
 alias mvv='/usr/bin/mv'
 alias {mkdir,mdkir}='mkdir -p'
