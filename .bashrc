@@ -90,6 +90,7 @@ alias downs='cd ~/Downloads'
 alias cp='cp -i --preserve=mode,timestamps'
 alias copy='/usr/bin/cp'
 alias cpp='cp -i -p'
+alias cpr='cp -i -p -r'
 alias ccp='sudo install -o robbie_user -g robbie_user -T'
 alias mv='mv -i' # -v?
 alias mvv='/usr/bin/mv'
