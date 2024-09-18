@@ -28,13 +28,14 @@
 
 * Collapsable div: [link](https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab)
   * Example used in [AWS Notes](https://github.com/robbiehume/CS-Notes/wiki/AWS) at top of page, and [Java Notes](https://github.com/robbiehume/CS-Notes/wiki/Java#-strings-)
-  * To start with it opened, do <details open="">
+  * To start with it opened, do `<details open="">`
   * To add header styling, put the summary content in a header tag. Ex:
-     *  <details>
+     *  ```html
+        <details>
           <summary><h4>Header title (Click me)</h4></summary>
           Content
         </details>
-  
+        ```
   
 ## Misc. tips
 * To look through a wiki contents inside collapsable sections, search through the edit page
