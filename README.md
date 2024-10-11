@@ -41,4 +41,7 @@
 * To look through a wiki contents inside collapsable sections, search through the edit page
 * Could create markdown pages in the repo and link to them from the wiki pages 
   * Can also add sample code into the repo
-* Open all closed `<details>` sections: `document.querySelectorAll('details').forEach(details => details.open = true);`
+* Open all closed `<details>` sections:
+  * ```js
+    document.querySelectorAll('details').forEach(details => details.open = true);
+    ```
