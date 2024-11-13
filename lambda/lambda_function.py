@@ -40,6 +40,7 @@ def lambda_handler(event, context):
     query = parse.unquote_plus(queryStringParameters.get('query', ''))
 
     elif 'test' in path:
+        utilities.send_email(cursor, 'email@test.com')
         return test_controller.query_db(cursor, query) 
     else:
         return utilities.createError(HTTPStatus.BAD_REQUEST, "Not a valid path")
