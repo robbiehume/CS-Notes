@@ -34,16 +34,19 @@ def lambda_handler(event, context):
     print('EVENT: ', json.dumps(event))
     print('CONTEXT: ', context)
 
-    queryStringParameters = event.get('queryStringParameters')
     path = event.get('path')
     headers = event['headers']
+    data = json.loads(body) if (body := event.get('body')) and headers.get('content-type')[0] == 'application/json' else body
+    parameters = event.get('queryStringParameters')
     query = parse.unquote_plus(queryStringParameters.get('query', ''))
 
     elif 'test' in path:
-        utilities.send_email(cursor, 'email@test.com')
-        return test_controller.query_db(cursor, query) 
+        return test_controller.handle_test(path, headers, data, parameters, cursor, query) 
+    elif 'email' in path:
+        return utilities.send_email('test message', 'test subject', 'email@test.com')
     else:
         return utilities.createError(HTTPStatus.BAD_REQUEST, "Not a valid path")
+
 
 def create_connection(context):
     global server, username, password, database_name, connection,  submission_email
