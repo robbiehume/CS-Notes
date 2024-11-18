@@ -1,4 +1,19 @@
 import utilities
+import traceback
+
+def handle_test(path, headers, data, parameters, cursor, query):
+    routes = {
+        '/query':  lambda: handle_query(cursor, query),
+        '/test':   lambda: handle_test(cursor),
+        '/insert': lambda: handle_insert(cursor)
+    }
+
+    try:
+        return routes.get(path, lambda: None)()
+    except:
+        print(traceback.format_exc())
+        return utilities.createError(HTTPStatus.BAD_REQUEST, 'Not a valid endpoint')
+
 
 def query_db(cursor, query):
     try:
