@@ -34,15 +34,14 @@ def createResponse(jsonData, headers={}):
     
     return responseObject
 
-def send_email(cursor, recipient_email):
+
+def send_email(message, subject, recipient_email):
     from email.mime.text import MIMEText
 
     sender_email = os.environ.get('Sender_Email')
     
-    message = 'sample email'
-
     email = MIMEText(message)
-    email['Subject'] = 'Test'
+    email['Subject'] = subject
     email['From'] = sender_email
     email['To'] = recipient_email
 
