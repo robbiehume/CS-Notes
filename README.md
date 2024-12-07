@@ -1,5 +1,6 @@
 # CS-Notes
 
+### [Wiki notes link](https://github.com/robbiehume/CS-Notes/wiki)
 
 ## GitHub Wiki tips
 * HTML tab space: 
