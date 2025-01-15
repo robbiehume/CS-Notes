@@ -1,38 +1,45 @@
 import json, os, urllib3
+import uuid, hashlib
 import smtplib
-import lambda_function
+from urllib.error import *
+from urllib.request import urlopen
+# from url_normalize import url_normalize
+# from jinja2 import Environment, FileSystemLoader
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
-
-def createError(errorNumber:int, message:str):
+def createError(error_number:int, message:str, headers={}):
     error = {}
-    error['error'] = errorNumber
+    error['error'] = error_number
     error['message'] = message
-    return createResponse(error)
+    return createResponse(error, headers, error_number)
 
 
-def getJSONData(cursor):
-    rowHeaders = [x[0] for x in cursor.description] 
-    rows = cursor.fetchall()
-    results = []
-    for row in rows:
-        results.append(dict(zip(rowHeaders, row)))
+def createResponse(jsonData, headers={}, status_code=200):
+    response_object = {}
 
-    return results
-
-
-def createResponse(jsonData, headers={}):
-    responseObject = {}
-    if ('error' in jsonData):
-        responseObject['statusCode'] = jsonData['error']
-        responseObject['body'] = jsonData['message']
+    if 'error' in jsonData and status_code != 200:
+        response_object['statusCode'] = jsonData['error']
+        response_object['body'] = jsonData['message']
+    elif type(jsonData) in [dict, list]:
+        response_object['statusCode'] = status_code
+        response_object['body'] = json.dumps(jsonData, indent=4, sort_keys=True, default=str)
+        response_object['headers'] = headers
+        response_object['headers']['Content-Type'] = 'application/json'
+        return response_object
     else:
-        responseObject['statusCode'] = 200
+        response_object['statusCode'] = status_code
+        response_object['body'] = jsonData
+        
+    response_object['headers'] = headers
+    response_object['headers']['Content-Type'] = 'text/javascript;charset=UTF-8'
 
-    responseObject['headers'] = headers
-    responseObject['headers']['Content-Type'] = 'application/json'
-    responseObject['body'] = json.dumps(jsonData, indent=4, sort_keys=True, default=str)
+    return response_object
     
-    return responseObject
+    
+def is_2xx_resp(resp):
+    status = resp.status_code if hasattr(resp, 'status_code') else resp.status
+    return True if 200 <= status <= 299 else False
 
 
 def send_email(message, subject, recipient_email):
@@ -49,6 +56,21 @@ def send_email(message, subject, recipient_email):
     smtp = smtplib.SMTP(os.environ.get('SMTP_Server'))
     smtp.sendmail(sender_email, recipient_email, email.as_string())
     smtp.close()
+
+
+def getJSONData(cursor):
+    rowHeaders = [x[0] for x in cursor.description] 
+    rows = cursor.fetchall()
+    results = []
+    for row in rows:
+        results.append(dict(zip(rowHeaders, row)))
+
+    return results
+
+
+def get_all_rows_from_table(cursor, table):
+    cursor.execute(f'SELECT * from {table}')
+    return getJSONData(cursor)
 
     return createResponse({ 'status': 'Email process complete' })
     
