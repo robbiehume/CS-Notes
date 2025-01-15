@@ -1,4 +1,5 @@
 import json
+from urllib import parse 
 
 
 class Request:
@@ -11,6 +12,7 @@ class Request:
         self.path_parts = [p for p in self.path.split('/') if p]
         self.route = '/' + self.path_parts[0]
         self.endpoint = '/' + self.path_parts[-1]
+        self.query = parse.unquote_plus(event.queryStringParameters.get('query', ''))
 
         print('path_parts:', self.path_parts, 'route:', self.route, 'endpoint:', self.endpoint) 
             
