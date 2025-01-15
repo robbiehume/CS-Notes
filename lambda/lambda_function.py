@@ -34,18 +34,27 @@ def lambda_handler(event, context):
     print('EVENT: ', json.dumps(event))
     print('CONTEXT: ', context)
 
-    path = event.get('path')
-    headers = event['headers']
-    data = json.loads(body) if (body := event.get('body')) and headers.get('content-type')[0] == 'application/json' else body
-    parameters = event.get('queryStringParameters')
-    query = parse.unquote_plus(queryStringParameters.get('query', ''))
+    # return utilities.createResponse({'message': 'Auto 200 for testing'})
 
-    elif 'test' in path:
-        return test_controller.handle_test(path, headers, data, parameters, cursor, query) 
-    elif 'email' in path:
-        return utilities.send_email('test message', 'test subject', 'email@test.com')
-    else:
-        return utilities.createError(HTTPStatus.BAD_REQUEST, "Not a valid path")
+    request = Request(event, context, cursor)
+
+    if request.is_post_req_with_empty_body():
+        return utilities.createError(HTTPStatus.BAD_REQUEST, 'No data provided')
+
+    return router.dispatch(request)
+
+    # path = event.get('path')
+    # headers = event['headers']
+    # data = json.loads(body) if (body := event.get('body')) and headers.get('content-type')[0] == 'application/json' else body
+    # parameters = event.get('queryStringParameters')
+    # query = parse.unquote_plus(queryStringParameters.get('query', ''))
+
+    # elif 'test' in path:
+    #     return test_controller.handle_test(path, headers, data, parameters, cursor, query) 
+    # elif 'email' in path:
+    #     return utilities.send_email('test message', 'test subject', 'email@test.com')
+    # else:
+    #     return utilities.createError(HTTPStatus.BAD_REQUEST, "Not a valid path")
 
 
 def create_connection(context):
