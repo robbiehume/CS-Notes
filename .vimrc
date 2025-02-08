@@ -158,7 +158,11 @@ vmap cc <S-I>#<ESC>
 nnoremap cc <S-I>#<ESC>
 nnoremap cd ^s<ESC>
 
-" Comment / uncomment javascript / java style (/)
+" Comment out multiple lines: javascript/ java style (//)
+"     Must select the beginning of each line you want to comment by doing Ctrl-V
+vmap cj <S-I>//<ESC>
+
+" Comment / uncomment javascript / java style (//)
 nnoremap cj <S-I>//<ESC>
 
 " Comment / uncomment html (<!-- ... -->)
