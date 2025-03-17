@@ -28,3 +28,8 @@ get_service_status (){
     export GREP_COLORS=''
     echo "-----------------------------"
 }
+
+echo -e "\nStarting nginx service"
+sudo systemctl enable nginx
+sudo systemctl restart nginx
+get_service_status "nginx"
