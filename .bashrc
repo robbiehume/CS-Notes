@@ -101,8 +101,7 @@ alias sdiff='sudo diff --color'
 alias svdiff='sudo vimdiff -c "source /home/robbie_user/.vimrc"'
 alias cls='clear'
 alias rmd='rm -rv'  # also add -f ?
-alias cim='vim'
-alias vi='vim'
+alias {vi,cim}='vim'
 alias tail='sudo tail'
 alias tailf='sudo tail -F'
 alias sscp='scpp'
@@ -117,6 +116,10 @@ function scpp () {  # copy files with sudo and set file owner to current user?
     user=$(whoami)
     sudo cp -a $@
     sudo chown $user.$user -R ${@: -1}
+}
+alias vimmk='mkvim'
+mkvim() {
+    mkdir -p "$(dirname "$1")" && vim "$1"; 
 }
 #function cp () {
 #    if [[ $1 == "-f" || $2 == "-f" ]]
