@@ -7,7 +7,7 @@ def parse_and_create_structure(input_file: str, root_dir: str = '.'):
         lines = f.readlines()
 
     current_file = None
-    buffer = []
+    buffer = [] 
 
     for line in lines:
         if line.strip().startswith('-- FILE:'):
