@@ -2,3 +2,4 @@ pytest
 moto
 boto3
 python-lambda-local
+setuptools
