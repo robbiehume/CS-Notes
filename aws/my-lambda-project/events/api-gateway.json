@@ -1,0 +1,9 @@
+{
+  "resource": "/hello",
+  "path": "/hello",
+  "httpMethod": "GET",
+  "queryStringParameters": {
+    "name": "Alice"
+  }
+}
+
