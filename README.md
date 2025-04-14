@@ -12,6 +12,11 @@
 * Crop an image: `<img src="image_link" width="400">`
 * Put a single back tick in code format block: `` ` ``
 * Cleaner arrow than `-->`: `→`
+* Markdown table text alignment (line under headers):
+  * `:---` : The colon on the left side indicates that the content in that column should be left-aligned.
+  * `---:`: A colon on the right side indicates right-alignment.
+  * `:---:`: Colons on both sides indicate center-alignment.
+  * `---`: No colons usually defaults to left-alignment, but can sometimes vary depending on the Markdown renderer.
 
 * Side by side code table template:
     * <table><tr>
