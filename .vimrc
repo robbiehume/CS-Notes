@@ -1,27 +1,6 @@
-" Mapping explanation
-"    https://dev.to/iggredible/basic-vim-mapping-5ahj
-
-" Tab insert spaces?
-"    (https://stackoverflow.com/questions/234564/tab-key-4-spaces-and-auto-indent-after-curly-braces-in-vim)
-
-" Resources
-"    Useful vimrc: (https://github.com/amix/vimrc)
-"    https://github.com/DJMcMayhem/dotFiles/blob/2f91270f2e88ddd9a916c8d81702dcb2e043f5c7/.vimrc#L283
-
-" Useful commands:
-"  :help key-notation
-
-
-"" Commands that need to be edited with ctrl, alt, etc. depending on system:
-" alt-j / ctrl-j
-" alt-p
-" alt-f
-" alt-e
-
-
-"if !has('nvim')
-"    set ttymouse=xterm2
-"endif
+if !has('nvim')
+    set ttymouse=xterm2
+endif
 
 
 syntax on
@@ -69,12 +48,19 @@ set clipboard=unnamed
 
 nnoremap ftn :set ft=nginx<CR>
 
-" Ctrl-S to turn syntax highlighting on / off
+" Turn syntax highlighting on / off
 nmap <C-S> :syntax on<CR>
 nmap <C-S-F> :syntax off<CR>
 
-" Ctrl-J to turn json formatting on; should we do alt-j instead?
-nmap <C-J> :%!jq .<CR>G
+" Alt-J (+S for sorting) to turn json formatting on
+nmap  :%!jq .<CR>G
+nmap  :%!jq -S .<CR>G
+
+"––– High-contrast vimdiff colors –––
+highlight DiffAdd    ctermbg=DarkGreen  guibg=DarkGreen
+highlight DiffDelete ctermbg=DarkRed    guibg=DarkRed
+highlight DiffChange ctermbg=DarkBlue   guibg=DarkBlue
+highlight DiffText   ctermbg=Yellow     guibg=Yellow
 
 " Redo last undo
 nnoremap rr <c-r>
@@ -92,13 +78,12 @@ xnoremap <leader>p "_dp
 
 " Alt-p to paste from copy register (helpful if you delete something after copying)
 "     Alt-P for paste before cursor
-" Or Ctrl-p instead?
 "nnoremap  "0p
 "nnoremap  "0P
 nnoremap <C-p> "0p
 
 " Alt-p to paste from register while in insert mode (it pastes before the cursor)
-imap ^[p ^R0
+imap  0
 
 " Swap current line with line below / above it
 nnoremap ml ddp
@@ -142,7 +127,7 @@ cnoremap wz<CR> w!<CR> <C-Z>
 nnoremap zz <C-Z>
 
 " Alt-F to W (move forward one word)
-nnoremap ^[f W
+nnoremap  W
 
 " Go to matching bracket / parentheses
 nnoremap mb %
@@ -158,11 +143,7 @@ vmap cc <S-I>#<ESC>
 nnoremap cc <S-I>#<ESC>
 nnoremap cd ^s<ESC>
 
-" Comment out multiple lines: javascript/ java style (//)
-"     Must select the beginning of each line you want to comment by doing Ctrl-V
-vmap cj <S-I>//<ESC>
-
-" Comment / uncomment javascript / java style (//)
+" Comment / uncomment javascript / java style (/)
 nnoremap cj <S-I>//<ESC>
 
 " Comment / uncomment html (<!-- ... -->)
@@ -174,13 +155,13 @@ nnoremap chd ^dw<ESC>g_dws<BS>
 nnoremap di cc
 
 " Keep new cursor position on visual copy
-vnoremap y m`y<C-O>
+vnoremap y m`y
 
 " Delete character under cursor and enter insert mode (don't copy character)
 nnoremap s "_dli
 
 " Shift-Backspace to delete forwards
-"imap ^H ^[[3~
+"imap
 
 " Change current word
 "     It will delete the word the current cursor is on, then type what you want to replace
@@ -196,7 +177,6 @@ nnoremap ffh cgn
 nnoremap rh :%s///g<left><left>
 
 "" Delete word and enter insert mode
-"      used to be caw instead of ciw
 nnoremap <silent> dw ciw
 
 " Ctrl-Space or ,+Enter to add new line from insert mode
@@ -208,7 +188,7 @@ imap <C-@> <Esc>o
 nnoremap <C-H> *N
 
 " Alt-E to reload file
-nnoremap ^[e :e!<CR>G
+nnoremap  :e!<CR>G
 
 " Press i while text is highlighted in visusal mode to delete it and enter insert mode
 vnoremap i di
@@ -243,8 +223,8 @@ inoremap <C-l> <Right>
 inoremap <C-j> <C-o>gj
 
 "(R)eplace all
-nnoremap ^[r yw:%s/\<<C-r>"\>//g<left><left>
-"nnoremap ^[r y:%s/<-r>"/new text/g
+nnoremap  yw:%s/\<<C-r>"\>//g<left><left>
+"nnoremap  y:%s/<-r>"/new text/g
 
 "Select entire line (minus EOL) with 'vv', entire file (characterwise) with 'VV'
 xnoremap <expr> V mode() ==# "V" ? "gg0voG$h" : "V"
@@ -263,9 +243,6 @@ inoremap <C-b> <C-o>db
 
 " Set filetype syntax based on file extension
 au BufRead,BufNewFile *.service setfiletype systemd
-au BufRead,BufNewFile *homepage*.conf setfiletype nginx
-au BufRead,BufNewFile *digest*.conf setfiletype nginx
-au BufRead,BufNewFile *bestbets*.conf setfiletype nginx
 au BufRead,BufNewFile *log_format.conf setfiletype nginx
 
 " Keeps past edits so you can undo to past changes from previous vim sessions
