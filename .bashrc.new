@@ -1,0 +1,466 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# VARIABLES
+#export PATH=$PATH:/home/robbie/bin/bin
+#export PYTHONUSERBASE=/home/robbie/bin
+export {sysd,system}=/etc/systemd/system
+
+
+# Misc.
+complete -r aws
+complete -C '/usr/local/bin/aws_completer' aws
+complete -W 'nginx' starts stops rs restarts sts statuss isactive
+complete -W 'nginx' jctl journalctl jc jt
+source /usr/share/bash-completion/completions/git
+export EDITOR=vim
+export H=~
+
+# shopt commands
+shopt -s cdspell dirspell direxpand
+
+
+# Eternal bash history.
+# ---------------------
+# Undocumented feature which sets the size to "unlimited".
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+HISTSIZE= #5000
+HISTFILESIZE= #5000
+HISTTIMEFORMAT='%m/%d/%y %H:%M - '  #"%F %T: "
+HISTCONTROL=ignoredups
+#HISTIGNORE='ll':'lsa':'lst':'ls':'cdb':'cdh':'vbrc':'sbrc':'vrc'
+
+# Change the file location because certain bash sessions truncate .bash_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=/home/robbie/.bash_eternal_history
+# Force prompt to write history after every command (useful for when you have multiple ssh sessions open)
+# http://superuser.com/questions/20900/bash-history-loss
+#shopt -s histappend
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+# If wanting to refresh history, do bash -l to get history of other open sessions
+
+
+
+# Allow ctrl-S for history navigation (with ctrl-R)
+[[ $- == *i* ]] && stty -ixon
+
+
+
+#######################################################
+# GENERAL ALIASES
+#######################################################
+
+# Aliases to list directory files
+alias {l,ll,sll}='sudo ls -lh --color'
+alias ls='sudo ls --color'
+alias slt='sudo ls -ltrh --color'
+alias sl='sudo ls --color'
+#alias l='ls'
+#alias s='ls'
+#alias lo='ls -o'
+alias {lst,llt}='sudo ls -ltrh --color'
+alias lstr='sudo ls -lth --color'
+alias lsa='sudo ls -Alh --color'
+alias {lsta,lsat}='sudo ls -Altrh --color'
+alias lsg='lst| grep -i '
+alias lsgrep='lst | grep -i '
+alias lstree='tree -L 3 -I "venv|__pycache__"'  # recursive ls down 3 levels, excluding venv and pycache
+
+# Aliases to change directory
+alias cd='auto_cd'
+alias ccd='cd'
+alias cdb='command cd -; ll'
+alias {opwd,epwd,pwdo}='echo $OLDPWD'
+alias cdh='cd ~; ll'
+alias cd..='cd ..; ll'
+alias cd...='cd ../..; ll'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+# Move 'up' so many directories instead of using several cd ../../, etc.
+up() { cd $(eval printf '../'%.0s {1..$1}) && pwd; }
+pud() { pushd $1; }
+pod() { popd $1; ll; }
+auto_cd() {
+  builtin cd "${1:-$HOME}" || return  # Use the built-in cd command to avoid recursion
+  [ "$1" == ".." ] && return
+  # Check if the current directory contains exactly one subdirectory item
+  if [ "$(find . -mindepth 1 -maxdepth 1 | wc -l)" -eq 1 ]; then
+      subdir=$(find . -mindepth 1 -maxdepth 1 -type d | head -n 1)
+      if [ "$subdir" != "" ]; then
+        echo "Only one file in $1, cd-ing into $subdir subdirectory"
+        builtin cd "$subdir"
+      fi
+  fi
+}
+
+### Aliases to modified commands
+
+#alias suroot='sudo bash --init-file /home/robbie/.bashrc' # allows for root shell with user .bashrc
+#alias cp='cp -i' # -v?
+#alias cp='cp -i --preserve=mode,timestamps'
+cp() {
+    if [ -d "$1" ]; then
+        command cp -r -i --preserve=mode,timestamps "$@"
+    else
+        command cp -i --preserve=mode,timestamps "$@"
+    fi
+}
+export -f cp
+alias copy='/usr/bin/cp'
+alias cpp='cp -i -p'
+alias cpr='cp -i -p -r'
+alias mv='mv -i' # -v?
+alias mvv='/usr/bin/mv'
+alias {mkdir,mdkir}='mkdir -p'
+alias chmod='sudo chmod'
+alias chown='sudo chown'
+alias dnf='sudo dnf'
+alias diff='diff --color'
+alias sdiff='sudo diff --color'
+alias svdiff='sudo vimdiff -c "source /home/robbie/.vimrc"'
+alias cls='clear'
+alias rmd='rm -rv'  # also add -f ?
+alias {vi,cim}='vim'
+alias tail='sudo tail'
+alias tailf='sudo tail -F'
+#alias sgrep='sudo grep --color=auto'
+alias grep='mygrep'
+mygrep() {
+    # Attempt GREP in Basic Regular Expressions (BRE) mode
+    sudo command grep --color=auto "$@"
+    status=$?
+
+    # If GREP fails (no matches or error), retry with Extended Regular Expressions (ERE)
+    if [ $status -ne 0 ]; then
+        echo -e "\n\tTrying grep -E instead\n"
+        sudo command grep -E --color=auto "$@"
+    fi
+}
+alias ccp='sudo install -o $(whoami) -g $(whoami) -T'
+alias {scopy,scpp,sscp}='sudo_cp'
+function sudo_cp () {
+    user=$(whoami)
+    sudo cp -a $@
+    sudo command chown $user.$user -R ${@: -1}
+}
+#function cp () {
+#    if [[ $1 == "-f" || $2 == "-f" ]]
+#    then
+#       echo "/usr/bin/cp $@"
+#       #/usr/bin/cp -v $@
+#    else
+#       echo "/usr/bin/cp -i $@"
+#       #/usr/bin/cp -i $@
+#    fi
+#}
+
+# sudo aliases 
+alias sudo='sudo '   # allows for sudo to run aliases
+alias svim='sudo vim -c "source /home/robbie/.vimrc" '
+alias srm='sudo rm'
+alias {srmd,srmf}='sudo rm -rv'  # also add -f ?
+#alias {scpp,scp_,scopy}='sudo /usr/bin/cp -i'
+alias smv='sudo mv'
+alias sln='sudo ln'
+alias sdr='sudo systemctl daemon-reload'
+alias {alls,sall}='sudo systemctl -t service'
+alias {systemctl,sysctl,sctl}='sudo systemctl'
+alias {syse,sedit,edits}="sudo -E VIMINIT='source /home/robbie/.vimrc' systemctl edit"
+
+# tail functions
+tailj () {
+    if [[ $# -eq 1 ]]
+    then
+        sudo tail $1 | grep -o '{[^}]*}' | jq
+    elif [[ $# -eq 2 ]]
+    then
+        sudo tail -F $2 | jq
+    fi
+}
+
+# Run last command (Similar to !!)
+#    Can pass a parameter to run the first command that matches it
+#        Ex: 'pp v' will run last command that starts with v
+#    If nothing is provided, it will run the last command
+alias {rr}='fc -s'  # or just r?
+alias pp='fc -s -2'    # run 2nd to last command
+alias ppp='fc -s -3'    # run 2nd to last command
+
+pf () {
+    #cat ~/.bash_eternal_history | grep $1 | tail -1
+    re='^[0-9]+$'
+	if [[ $# -eq 0 ]] 
+    then 
+        fc -s 
+    #elif ! [[ $1 =~ $re ]]
+    #then 
+    #    echo "elif"
+    #    #fc -s -$1
+    else
+        eval "$(cat ~/.bash_eternal_history | grep $1 | tail -1)"
+    fi
+}
+
+# Edit .bashrc / .vimrc / .tmux.conf
+alias {src,sbrc}='. /home/robbie/.bashrc'
+alias vbp='vim /home/robbie/.bash_profile'
+alias sbp='. /home/robbie/.bash_profile'
+alias cbrc='vbrc'
+vbrc () {
+	vim /home/robbie/.bashrc
+	source /home/robbie/.bash_profile
+	if [[ $(hostname) == "robbie" ]]
+	then
+		cat /home/robbie/.bashrc > /home/robbie/test_repo/.bashrc
+		cat /home/robbie/.bashrc > /home/robbie/misc/.bashrc
+        cd /home/robbie/misc/; git add .bashrc; command cd -
+	fi
+}
+vrc () {
+	vim /home/robbie/.vimrc
+	if [[ $(hostname) == "robbie" ]]
+	then
+		cat /home/robbie/.vimrc > home/robbie/test_repo/.vimrc
+		cat /home/robbie/.vimrc > home/robbie/misc/.vimrc
+        cd /home/robbie/misc/; git add .vimrc; cd -
+	fi
+}
+
+# See currently used ports
+alias ports='sudo netstat -anp | grep LISTEN | grep -P ":\K[0-9]{1,5}"'
+alias {portg,portsg,portgrep,portsgrep}='ports | grep'
+
+# Search files in the current folder
+alias findg='find . | grep '
+
+# See bash command line history
+alias his='history'
+alias hist='history | tail'
+alias {hg,gh}='history | grep '
+alias chis='vhis'
+vhis () {
+	vim <(history | awk '{$1=""}1')
+}
+
+# Search running processes
+alias {psg,psgrep}='ps aux | grep '
+alias {pg,pgrep}='pgrep -a -u robbie'
+alias psa='ps aux'
+alias psu='ps -u'
+alias js='jobs -l'
+alias {kkj,kkjs,kjobs,killjobs,killj,killjs}='kill -9 $(jobs -p)'
+alias kill='kill -9'
+alias pkill='pkill'
+alias fgg='fg -'
+
+# Git aliases / functions
+export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -o 'IdentitiesOnly yes'" # Make git use ssh key instead of cert
+alias {cdg,cdtop,gtop}='cd `git rev-parse --show-toplevel`' # cd to git project top-level directory
+alias {gits,gs}='git status'
+alias {gita,ga}='git add'
+alias {addt,gat}='git add `git rev-parse --show-toplevel`/'
+alias {gitc,gc}='git commit -m'
+alias gitb='git branch' # or gb
+alias {gitf,gf}='git fetch'
+alias {gitd,gd}='git diff --no-index --ignore-cr-at-eol'
+alias gdi='git diff --ignore-cr-at-eol'
+alias {gdm,gdmod}='git diff --diff-filter=M --ignore-cr-at-eol'
+alias {gitl,gl}='git log -5 --graph --name-status --pretty=format:"%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+alias {gitll,gll}='git log --graph --name-status --pretty=format:"%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+alias {gitdc,gdc}='git diff --cached'
+alias gdcm='git diff --cached --diff-filter=M'
+alias {gcr,gci}='git checkout robbie'
+alias gcm='git checkout main'
+alias gmm='git merge main'
+alias gcmm='git checkout main; git merge robbie'
+alias {gpcm,gpm}='git push; gcmm'
+alias {gmr,gmi}='git merge robbie'
+alias {gpush,gitp}='git push'
+alias pullmain='cd `git rev-parse --show-toplevel` && git checkout main && git pull'   # cd to top level directory, checkout main, and pull
+alias pushmain='git push; git checkout robbie'
+alias pull='git pull'
+alias checkout='git checkout'
+glh () {
+	if [[ $# -eq 0 ]]; then
+		git log | head -n 13
+	else
+		git log | head -n $1
+	fi
+}
+com () {
+	git commit -m "$@"
+}
+gac () {
+    git add .
+    git commit -m "$@"
+}
+gacp () {
+	gac $@
+    git push
+}
+#gcmm () {
+#	git checkout main
+#	git merge robbie
+#}
+add () {
+	if [ $# -eq 0 ]
+	then 
+		git add .
+	else
+		git add $@
+	fi
+}
+
+# Misc.
+alias cdsa='cd /etc/nginx/sites-available; lst'
+alias py='python3.12 || python3.11 || python3.10 || python3.9 || python3'
+alias {bl,bashl}='bash -l'
+alias {shlvl,lvl,level}='echo $SHLVL'
+alias ifc='ifconfig'
+alias {check_s3,checks3}='. /home/robbie/working/bin/check_s3.sh'
+alias {update_user_files,updateuser_files,uuf}='bash /export/update_user_files.sh'
+alias {create_user_environment,createuser_environment,cue}='bash /export/robbie/create_user_environment.sh; . ~/.bash_profile'
+alias {cpvrc,cpvimrc}='cp ~/.vimrc home/robbie/misc/.vimrc'
+alias {cpbrc,cpbashrc}='cp ~/.bashrc home/robbie/misc/.bashrc'
+alias dv='deactivate'
+alias {av,act}='. venv/bin/activate'
+alias {jt,jc,jctl}='journalctl -u'
+
+
+# Common vim / cp / gd nginx and logs
+alias clearcache='sudo find /var/cache/nginx/ -mindepth 1 -delete'
+alias lnl='sudo ls -lh --color /var/log/nginx; echo "/var/log/nginx/"'
+alias lnlt='sudo ls -ltrh --color /var/log/nginx; echo "/var/log/nginx/"'
+alias lns='sudo ls -lh --color /etc/nginx/sites-available; echo "/etc/nginx/sites-available/"'
+alias {nt,ngt}='sudo nginx -t'
+alias nle='svim /var/log/nginx/error.log'
+rn (){
+    nginx_test=$(command grep successful <(sudo nginx -t 2>&1))
+    . ~/.bashrc
+    if [ -n "$nginx_test" ];then
+        restarts nginx
+    else
+        sudo nginx -t
+    fi
+}
+
+
+#######################################################
+# SPECIAL FUNCTIONS
+#######################################################
+
+cdls (){
+    cd $1; ls
+}
+
+cdlst (){
+	cd $1; lst
+}
+
+cdl (){
+	cd $1; ll
+}
+
+cl (){
+	cd $1; ll
+}
+
+mkcd (){
+	mkdir -p $1; cd $1; pwd
+}
+mkdircd(){ mkcd "$@"; }
+cdmk(){ mkcd "$@"; }
+
+mkcp() {
+  if [ "$#" -lt 2 ]; then
+    echo "Usage: mkcp <source_file> <destination_path>"
+    return 1
+  fi
+
+  local source_file="$1"
+  local destination_path="$2"
+
+  if [[ "$destination_path" == */ ]]; then
+    # If the destination ends with a slash, treat it as a directory
+    local destination_dir="$destination_path"
+    local destination_file="$destination_dir$(basename "$source_file")"
+    echo "$destination_dir" "$destination_file"
+  else
+    echo 'else'
+    local destination_dir="$(dirname "$destination_path")"
+    local destination_file="$destination_path"
+  fi
+
+  mkdir "$destination_dir"
+
+  cp "$source_file" "$destination_file"
+}
+
+rmt (){
+	sudo mv -v $1 /home/robbie/trash_bin
+    sudo chown -R robbie.robbie /home/robbie/trash_bin/$(basename $1)
+}
+
+getvar (){ # output the value of a variable
+    local first=${!1:-"$1"}
+    shift
+    command echo "$first" "$@"
+}
+
+vimd () {
+	vimdiff $1 $2
+}
+
+vdiff () {
+	vimdiff $1 $2
+}
+
+svd () {
+	sudo vimdiff -c "source /home/robbie/.vimrc" $1 $2
+}
+
+rs () {
+    sudo systemctl restart $1; sleep 2; isactive $1
+}
+
+restarts (){
+	sudo systemctl restart $1; isactive $1 #sudo systemctl status $1
+}
+
+alias sts='statuss'
+statuss (){
+	#sudo systemctl status $1
+    isactive $1
+}
+
+isactive (){
+    stat=$(sudo systemctl status $1)
+    if [[ $stat == *"inactive"* ]]; then
+        echo "$stat" | command grep -E --color "\b(inactive|dead)\b|$"
+    else
+        echo "$stat" | GREP_COLORS='ms=01;32' command grep -E --color "\b(active|running)\b|$"
+    fi
+    export GREP_COLORS=''
+}
+
+stops (){
+	sudo systemctl stop $1; isactive $1 
+}
+
+starts (){
+	sudo systemctl start $1; isactive $1
+}
